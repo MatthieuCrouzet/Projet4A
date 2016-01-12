@@ -1,0 +1,30 @@
+Dashboard pour gestionnaire de tâches et de ressources
+
+Objectif
+
+Développer un portail de type Dashboard pour le gestionnaire de tâches et de ressource OAR.
+Les contraintes technologigues
+
+    SB Admin v2.0 rewritten in AngularJS
+    Approche Single-page_application et utilisation de service Restful 
+
+Plan de travail
+
+    Découverte de OAR
+    Découverte d'AngularJS et SB Admin 
+
+Conseil
+
+    Utiliser oar-docker pour la mise en place du gestionnaire OAR dans un environnement 
+
+virtualisé sur machine linux.
+Piste de développement
+
+    Gestion du broswer history (support de la navigation arrière/avant)
+    Login
+    Prise en compte des roles différencés utilisateur anonyme/ utilisateur identifié/ utilisateur administrateur
+    Afficache de la liste de job (datatable jquery)
+    Formulaire de soumission de job 
+    
+    
+http://air.imag.fr/index.php/Dashboard_pour_gestionnaire_de_t%C3%A2ches_et_de_ressources

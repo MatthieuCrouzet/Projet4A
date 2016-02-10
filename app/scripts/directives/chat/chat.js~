@@ -1,0 +1,39 @@
+'use strict';
+
+/**
+ * @ngdoc directive
+ * @name izzyposWebApp.directive:adminPosHeader
+ * @description
+ * # adminPosHeader
+ */
+angular.module('sbAdminApp')
+	.directive('chat',function(){
+		return {
+        templateUrl:'scripts/directives/chat/chat.html',
+        restrict: 'E',
+        replace: true,
+    	}
+	});
+
+app.controller('Chat',function($scope){
+	$scope.allmessages = [
+	{
+		message : "coucou",
+		user : "tanguy",
+		date : "10/02/16 15:58"
+	},
+	{
+		message : "tu vas bien?",
+		user : "matthieu",
+		date : "10/02/16 15:59"	
+	}]
+
+	$scope.addMessage = function(new_message){
+		$scope.allmessages.push(
+		{
+		message : $scope.new_message,
+		user : "tanguy",
+		date : "10/02/16 16:04"
+		}
+	}
+});

@@ -1,0 +1,46 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav in" id="side-menu">
+	    <li ng-class="{active:collapseVar==4}">
+		<a href="" ng-click="check(4)"><i class="fa fa-user"></i> Login<span
+		        class="fa arrow"></span></a>
+		<ul class="nav nav-second-level" collapse="collapseVar!=4">
+			<fieldset>
+			    <div class="form-group">
+				<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+			    </div>
+			    <div class="form-group">
+				<input class="form-control" placeholder="Password" name="password" type="password" value="">
+			    </div>
+			    <div class="checkbox">
+				<label>
+				    <input name="remember" type="checkbox" value="Remember Me">Remember Me
+				</label>
+			    </div>
+			    <!-- Change this to a button or input when using this as a form -->
+			    <a ui-sref="dashboard.home" class="btn btn-lg btn-success btn-block">Login</a>
+			</fieldset>
+		</ul>
+		<!-- /.nav-second-level -->
+	    </li>
+            <li ui-sref-active="active">
+                <a ui-sref="dashboard.home"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+            </li>
+            <li ui-sref-active="active">
+
+                <a ui-sref="dashboard.chart"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span></span></a>
+
+            </li>
+            <li><a href="http://oar.imag.fr/"> OAR link</a></li>
+	    <li>
+	    	<a><i class="fa fa-search"></i> Information search</a>
+	    	<sidebar-search><sidebar-search>
+	    </li>
+		
+        </ul> 
+    </div>
+    <!-- /.sidebar-collapse -->
+</div> 
+
+
+

@@ -5,7 +5,7 @@
 		<a href="" ng-click="check(4)"><i class="fa fa-user"></i> {{username}}<span
 		        class="fa arrow"></span></a>
 		<ul class="nav nav-second-level" collapse="collapseVar!=4">
-		    <button class="fa fa-sign-out" ng-model="button" ng-show="logged" ng-click="logout()"> Logout</button>
+		    <button ui-sref="dashboard.home" ng-show="logged"  class="btn btn-lg btn-danger btn-block fa fa-sign-out" ng-click="logout()"> Logout</button>
 		    <form ng-show="!logged">	
 			<fieldset>
 			    <div class="form-group">

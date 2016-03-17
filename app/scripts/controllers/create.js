@@ -7,6 +7,6 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-  .controller('FormCtrl', function($scope) {
-    $scope
-});
+  .controller('CreateCtrl', ['$scope',  function ($scope) {
+	$scope.all_info = '{\nid: '$scope.id+'\nnb core: '+$scope.nb-core+'\nfrenquency: '+$scope.freq+'GHz\n}';
+}]);

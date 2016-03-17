@@ -1,8 +1,8 @@
 <li class="sidebar-search">
     <div class="input-group custom-search-form">
-        <input type="text" class="form-control" placeholder="Machine ID">
+        <input type="text" class="form-control" placeholder="Machine ID" ng-model="id" ng-controller='ChartCtrl'>
         <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
+            <button ui-sref="dashboard.infos" class="btn btn-default" type="button">
                 <i class="fa fa-search"></i>
             </button>
         </span>

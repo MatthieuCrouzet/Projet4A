@@ -20,7 +20,9 @@ angular
       debug:false,
       events:true,
     });
-
+    // $routeProvider
+    //   .when('charts/:id', {templateUrl : '/views/chart.html', controller : 'ChartCtrl'})
+    //   .otherwise('/dashboard/home');
     $urlRouterProvider.otherwise('/dashboard/home');
 
     $stateProvider
@@ -105,9 +107,9 @@ angular
         templateUrl:'views/pages/login.html',
         url:'/login'
     })
-      .state('dashboard.chart',{
+      .state('dashboard.infos',{
         templateUrl:'views/chart.html',
-        url:'/chart',
+        url:'/infos',
         controller:'ChartCtrl',
         resolve: {
           loadMyFile:function($ocLazyLoad) {
@@ -120,12 +122,21 @@ angular
             }),
             $ocLazyLoad.load({
                 name:'sbAdminApp',
-                files:['scripts/controllers/chartContoller.js']
+                files:['scripts/controllers/chartController.js']
             })
           }
         }
     })
-      .state('dashboard.table',{
+    .state('dashboard.modify',{
+        templateUrl:'views/modify.html',
+        url:'/modify'
+    })
+    .state('dashboard.create',{
+        controller: 'ChartCtrl',
+        templateUrl:'views/create.html',
+        url:'/create'
+    })
+    .state('dashboard.table',{
         templateUrl:'views/table.html',
         url:'/table'
     })

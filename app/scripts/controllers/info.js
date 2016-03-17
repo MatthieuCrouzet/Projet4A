@@ -7,7 +7,6 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-  .controller('MainCtrl', function($scope,$rootScope) {
-  	
-	
+  .controller('ChartCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+  	$scope.id = '4';
   });

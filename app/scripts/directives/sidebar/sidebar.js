@@ -15,24 +15,32 @@ angular.module('sbAdminApp')
       replace: true,
       scope: {
       },
-      controller:function($scope){
+      controller:function($scope,$rootScope){
         $scope.selectedMenu = 'dashboard';
         $scope.collapseVar = 0;
         $scope.multiCollapseVar = 0;
-        $scope.username = 'Login';
-        $scope.logged = false;
+        $rootScope.username = 'Login';
+        $rootScope.is_admin = false;
+        $rootScope.logged = false;
+	      $scope.is_admin = true;
         
+
         $scope.login = function(){
-		$scope.username = $scope.newusername;
-		$scope.logged = true;
+		$rootScope.username = $scope.newusername;
+		if ($rootScope.username=='Admin'){
+			$rootScope.is_admin = true;
+		}
 		$scope.collapseVar = 0;
-        }
+		$rootScope.logged = true;
+    $scope.logged = true;
+        };
         
         $scope.logout = function(){
-        	$scope.username = 'Login';
-        	$scope.logged = false;
-        	$scope.collapseVar = 4;
-        }
+        	$rootScope.username = 'Login';
+        	$rootScope.logged = false;
+        	$rootScope.is_admin = false;
+        	$scope.collapseVar = 1;
+        };
         
         $scope.check = function(x){
           

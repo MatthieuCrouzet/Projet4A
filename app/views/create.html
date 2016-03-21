@@ -1,0 +1,29 @@
+<div class="container theme-showcase" role ="main">
+	<div class="page-header">
+	    <h1>Create job</h1>
+	</div>
+	<div class="row">
+	    <div class="col-md-6">
+			<h3>Parameters</h3>
+	   		<p>Name 
+			  	<input type="text" name="name" size="50" placeholder="new_job" ng-model="newJob.name"/>
+			</p>  
+            <p>Resources
+            	<input type="text" name="resource" size="50" placeholder="core=1,walltime=00:30:00" ng-model="newJob.resource"/>
+            </p>
+            <p>Type
+            	<input type="text" name="properties" size="50" placeholder="besteffort" ng-model="newJob.properties"/>
+            </p>
+            <p>Program to run 
+            	<input type="text" name="command" size="50" placeholder="/bin/sleep 1000" ng-model="newJob.command"/>
+            </p>
+            <p>Reservation dates 
+            	<input type="text" name="reservation" size="50" placeholder="2016-03-21 13:44:55" ng-model="newJob.reservation"/>
+            </p>
+            <p>Directory 
+            	<input type="text" name="directory" size="50" placeholder="/bin" ng-model="newJob.directory"/>
+            </p>
+            <button class="btn btn-success" ng-click="createJob(newJob)">Create this job</button>
+	    </div>
+	</div>
+</div>

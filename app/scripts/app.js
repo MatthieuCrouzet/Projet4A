@@ -138,6 +138,19 @@ angular
           }
         }
     })
+      .state('dashboard.info',{
+        templateUrl:'views/info.html',
+        url:'/info',
+        controller:'InfoCtrl',
+        resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/info.js']
+            })
+          }
+        }
+    })
       .state('dashboard.table',{
         templateUrl:'views/table.html',
         url:'/table'

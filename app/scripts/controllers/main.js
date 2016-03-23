@@ -10,9 +10,12 @@ angular.module('sbAdminApp')
   .controller('MainCtrl', function($scope, $rootScope) {
   	$scope.user = "docker";
     $rootScope.Core_ID = '';
-    $scope.appui = function(index){
+    $scope.getProperties = function(index){
+        alert("Properties : " + $scope.all[index]['Properties']);
+    };
+    $scope.sendJob = function(index){
       $rootScope.Core_ID = $scope.all[index]['Core_ID'];
-    }
+    };
   	$scope.all = [
     	{
     		"hostname" : "node1",
@@ -21,7 +24,7 @@ angular.module('sbAdminApp')
     		"RSC_ID" : 1,
     		"Alive" : true,
     		"State" : "Busy",
-    		"Properties" : ""
+    		"Properties" : "test"
     	},
     	{
     		"hostname" : "node1",

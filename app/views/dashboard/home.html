@@ -31,8 +31,8 @@
 	    			<button ng-show="node.State=='Busy'" class="btn btn-warning">{{node.State}}</button>
 	    			<button ng-show="node.State=='Free'" class="btn btn-success">{{node.State}}</button>
 	    		</td>
-	    		<td></td><td class="center"><button class="btn btn-info">Properties</button></td>
-	    		<td></td><td ng-show="user=='docker'"><button ui-sref="dashboard.create" class="btn btn-primary" ng-click="appui($index)">Send a job</button></td>
+	    		<td></td><td class="center"><button class="btn btn-info" ng-click="getProperties($index)">Properties</button></td>
+	    		<td></td><td ng-show="user=='docker'"><button ui-sref="dashboard.create" class="btn btn-primary" ng-click="sendJob($index)">Send a job</button></td>
 	    	</tr>
     </table>
 </div>

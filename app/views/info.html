@@ -21,7 +21,7 @@
                 <td></td><td>{{job.command}}</td>
                 <td></td><td>{{job.reservation}}</td>
                 <td></td><td>{{job.directory}}</td>
-                <td></td><td ng-show="user=='docker'"><button class="btn btn-danger" ng-click="kill($index)">Kill the job</button></td>
+                <td></td><td ng-show="user=='docker'"><button class="btn btn-danger" ng-click="deleteJob(job)">Delete the job</button></td>
             </tr>
     </table>
 </div>

@@ -14,6 +14,168 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
   ])
+    .factory('TimeFact', function () {
+    var factory = {
+      getDate : function() {
+        var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+      var hh = today.getHours();
+      var mn = today.getMinutes();
+      var ss = today.getSeconds();
+      if(dd<10) {  dd='0'+dd  }
+      if(mm<10) {  mm='0'+mm  }
+      if(hh<10) {  hh='0'+hh  }
+      if(mn<10) {  mn='0'+mn  }
+      if(ss<10) {  ss='0'+ss  }
+      var date = yyyy+'-'+mm+'-'+dd+' '+hh+':'+mn+':'+ss;
+        return date;
+      }
+    };
+    return factory;
+  })
+    .factory('JobFact', function () {
+    var factory = {
+      jobs : [
+        {
+          "id" : 1,
+          "name" : "job 1",
+          "resource" : "core=1,walltime=00:30:00",
+          "properties" : "besteffort",
+          "command" : "/bin/sleep 1000",
+          "reservation" : "2016-03-21 13:44:55",
+          "directory" : "/bin"
+        },
+        {
+          "id" : 2,
+          "name" : "job 2",
+          "resource" : "core=3,walltime=00:30:00",
+          "properties" : "besteffort",
+          "command" : "/bin/sleep 500",
+          "reservation" : "2016-03-11 13:44:55",
+          "directory" : "/bin"
+        },
+        {
+          "id" : 3,
+          "name" : "job 3",
+          "resource" : "core=2,walltime=00:30:00",
+          "properties" : "besteffort",
+          "command" : "/bin/sleep 3000",
+          "reservation" : "2016-03-27 13:44:55",
+          "directory" : "/bin"
+        },
+        {
+          "id" : 4,
+          "name" : "job 4",
+          "resource" : "core=1,walltime=00:30:00",
+          "properties" : "besteffort",
+          "command" : "/bin/sleep 2000",
+          "reservation" : "2016-03-21 13:54:55",
+          "directory" : "/bin"
+        }
+      ],
+      getJobs : function() {
+        return factory.jobs;
+      },
+      getJob : function(id) {
+        var job = {};
+        var jobs = factory.getJobs();
+        angular.forEach(jobs, function(value, key){
+          if(value.id == id) {
+            job = value;
+          }
+        })
+        return job;
+      },
+      putJob : function(newJob) {
+        factory.jobs.push(newJob);
+      },
+      deleteJob : function(index) {
+        factory.jobs.splice(index,1);
+      },
+      toString : function(job) {
+        var name = "name : " + job.name;
+        var resource = "\nresource : " + job.resource;
+        var reservation = "\nreservation  : " + job.reservation;
+        var directory = "\ndirectory : " + job.directory;
+        var type = "\ntype : " + job.type;
+        var command = "\ncommand : " + job.command;
+        var string = name+resource+type+command+reservation+directory;
+        return string;
+      }
+    };
+    return factory;
+  })
+    .factory('NodeFact', function () {
+    var factory = {
+      nodes : [
+        {
+            "hostname" : "node1",
+            "CPU_ID" : 1,
+            "Core_ID" : 1,
+            "RSC_ID" : 1,
+            "Alive" : true,
+            "State" : "Busy",
+            "Properties" : "test"
+        },
+        {
+            "hostname" : "node1",
+            "CPU_ID" : 1,
+            "Core_ID" : 2,
+            "RSC_ID" : 2,
+            "Alive" : true,
+            "State" : "Free",
+            "Properties" : ""
+        },
+        {
+            "hostname" : "node2",
+            "CPU_ID" : 2,
+            "Core_ID" : 3,
+            "RSC_ID" : 3,
+            "Alive" : false,
+            "State" : "Free",
+            "Properties" : ""
+        }
+      ],
+      getNodes : function() {
+        return factory.nodes;
+      },
+      getNode : function(id) {
+        var node = {};
+        var nodes = factory.getNodes();
+        angular.forEach(nodes, function(value, key){
+          if(value.id == id) {
+            node = value;
+          }
+        })
+        return node;
+      },
+      putNode : function(newNode) {
+        factory.nodes.push(newNode);
+      },
+      deleteNode : function(index) {
+        factory.nodes.splice(index,1);
+      },
+      toString : function(node) {
+        var hostname = "hostname : " + node.hostname;
+        var cpu = "\nCPU_ID : " + node.CPU_ID;
+        var core = "\nCore_ID : " + node.Core_ID;
+        var rsc = "\nRSC_ID : " + node.RSC_ID;
+        var alive; 
+        if(node.Alive){
+          alive = "\nIs alive : true";
+        }else{
+          alive = "\nIs alive : false";
+        } 
+        var state = "\nState : " + node.State;
+        var properties = "\nProperties : " + node.Properties; 
+        var string = hostname+cpu+core+rsc+alive+state+properties;
+        return string;
+      }
+    };
+    return factory;
+  })
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
     $ocLazyLoadProvider.config({

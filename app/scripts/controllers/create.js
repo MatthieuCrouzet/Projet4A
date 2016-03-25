@@ -9,8 +9,13 @@
 angular.module('sbAdminApp')
   .controller('CreateCtrl', ['$scope', '$rootScope', 'TimeFact', 'JobFact', function ($scope, $rootScope, TimeFact, JobFact) {
   	$scope.newJob = {};
-  	if($rootScope.Core_ID){ $scope.newJob['resource'] = "core="+$rootScope.Core_ID+",walltime=00:30:00"; }
-  	$scope.newJob['reservation'] = TimeFact.getDate();
+    $scope.newJob['reservation']=TimeFact.getDate();
+  	if('Core_ID' in $rootScope.RSC){ 
+      $scope.newJob['resource'] = "core="+$rootScope.RSC['Core_ID']+",walltime=00:30:00";
+    }
+    if('Properties' in $rootScope.RSC && $rootScope.RSC['Properties']['others'].match("besteffort=YES")){ 
+      $scope.newJob['properties'] = "besteffort"; 
+    }
   	$scope.createJob = function(newJob){
       if('name' in $scope.newJob){
         alert('Job created !\n'+JobFact.toString(newJob));

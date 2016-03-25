@@ -107,40 +107,59 @@ angular
     };
     return factory;
   })
-    .factory('NodeFact', function () {
+    .factory('NodeFact',[ '$http', function ($http) {
     var factory = {
-      nodes : [
-        {
-            "hostname" : "node1",
-            "CPU_ID" : 1,
-            "Core_ID" : 1,
-            "RSC_ID" : 1,
-            "Alive" : true,
-            "State" : "Busy",
-            "Properties" : "test"
-        },
-        {
-            "hostname" : "node1",
-            "CPU_ID" : 1,
-            "Core_ID" : 2,
-            "RSC_ID" : 2,
-            "Alive" : true,
-            "State" : "Free",
-            "Properties" : ""
-        },
-        {
-            "hostname" : "node2",
-            "CPU_ID" : 2,
-            "Core_ID" : 3,
-            "RSC_ID" : 3,
-            "Alive" : false,
-            "State" : "Free",
-            "Properties" : ""
-        }
-      ],
-      getNodes : function() {
+     nodes : [
+       {
+           "hostname" : "node1",
+           "CPU_ID" : 1,
+           "Core_ID" : 1,
+           "RSC_ID" : 1,
+           "Alive" : true,
+           "State" : "Busy",
+           "Properties" : {
+              "mem" : 4,
+              "others" : "besteffort=YES"
+            }
+       },
+       {
+           "hostname" : "node1",
+           "CPU_ID" : 1,
+           "Core_ID" : 2,
+           "RSC_ID" : 2,
+           "Alive" : true,
+           "State" : "Free",
+           "Properties" : {
+              "mem" : 8,
+              "others" : "test2,besteffort=YES"
+            }
+       },
+       {
+          "hostname" : "node2",
+           "CPU_ID" : 2,
+           "Core_ID" : 3,
+           "RSC_ID" : 3,
+           "Alive" : false,
+           "State" : "Free",
+           "Properties" : {
+              "mem" : 4,
+              "others" : "test"
+            }
+       }
+     ],
+     newID : function(){
+        var id = 0;
+        var nodes = factory.getNodes();
+        angular.forEach(nodes, function(value, key){
+          if(value.id > id) {
+            id = value.id;
+          }
+        })
+        return id+1;
+     },
+     getNodes : function() {
         return factory.nodes;
-      },
+     },
       getNode : function(id) {
         var node = {};
         var nodes = factory.getNodes();
@@ -175,7 +194,7 @@ angular
       }
     };
     return factory;
-  })
+  }])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
     $ocLazyLoadProvider.config({
@@ -309,6 +328,19 @@ angular
             $ocLazyLoad.load({
                 name:'sbAdminApp',
                 files:['scripts/controllers/info.js']
+            })
+          }
+        }
+    })
+      .state('dashboard.add',{
+        templateUrl:'views/add.html',
+        url:'/add',
+        controller:'AddCtrl',
+        resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/add.js']
             })
           }
         }

@@ -25,3 +25,19 @@
             </tr>
     </table>
 </div>
+<div ng-repeat="job in jobs">
+    <div class="col-lg-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                {{job.name}}
+            </div>
+            <div class="panel-body">
+                <p>Resources : {{job.resource}}</p>
+                <p>Properties : {{job.properties}}</p>
+                <p>Command : {{job.command}}</p>
+                <p>Reservation : {{job.reservation}}</p>
+                <p>Directory : {{job.directory}}</p>
+            </div>
+        </div>
+    </div>
+</div>

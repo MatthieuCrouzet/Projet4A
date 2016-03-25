@@ -14,7 +14,6 @@ angular.module('sbAdminApp')
       if(r==true){
         alert('The job have been deleted');
         JobFact.deleteJob(index);
-        $scope.jobs.splice(index,1);
       }
       else {
         alert('The job wasn\'t deleted !');

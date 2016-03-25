@@ -33,6 +33,7 @@
 	    		</td>
 	    		<td></td><td class="center"><button class="btn btn-info" ng-click="getProperties($index)">Properties</button></td>
 	    		<td></td><td ng-show="user=='docker'"><button ui-sref="dashboard.create" class="btn btn-primary" ng-click="sendJob($index)">Send a job</button></td>
+	    		<td></td><td ng-show="user=='docker'"><button class="btn btn-danger" ng-click="deleteRSC($index)">Delete this resource</button></td>
 	    	</tr>
     </table>
 </div>

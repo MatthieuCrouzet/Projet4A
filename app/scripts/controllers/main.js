@@ -9,42 +9,23 @@
 angular.module('sbAdminApp')
   .controller('MainCtrl', ['$scope', '$rootScope', 'NodeFact', function($scope, $rootScope, NodeFact) {
     $scope.user = "docker";
-    $rootScope.Core_ID = '';
+    $rootScope.RSC = {};
     $scope.getProperties = function(index){
-        alert("Properties : " + $scope.all[index]['Properties']);
+        alert("Properties : \n" + "\tMemory : " + $scope.all[index]['Properties']['mem'] + "\n\tOthers : " + $scope.all[index]['Properties']['others']);
     };
     $scope.sendJob = function(index){
-      $rootScope.Core_ID = $scope.all[index]['Core_ID'];
+      $rootScope.RSC = $scope.all[index];
     };
-    // $scope.all = [
-    //     {
-    //         "hostname" : "node1",
-    //         "CPU_ID" : 1,
-    //         "Core_ID" : 1,
-    //         "RSC_ID" : 1,
-    //         "Alive" : true,
-    //         "State" : "Busy",
-    //         "Properties" : "test"
-    //     },
-    //     {
-    //         "hostname" : "node1",
-    //         "CPU_ID" : 1,
-    //         "Core_ID" : 2,
-    //         "RSC_ID" : 2,
-    //         "Alive" : true,
-    //         "State" : "Free",
-    //         "Properties" : ""
-    //     },
-    //     {
-    //         "hostname" : "node2",
-    //         "CPU_ID" : 2,
-    //         "Core_ID" : 3,
-    //         "RSC_ID" : 3,
-    //         "Alive" : false,
-    //         "State" : "Free",
-    //         "Properties" : ""
-    //     }
-    // ];
+    $scope.deleteRSC = function(index){
+      var r = confirm("Are you sure you want to delete this resource?")
+      if(r==true){
+        alert('This resource have been deleted');
+        NodeFact.deleteNode(index);
+      }
+      else {
+        alert('The resource wasn\'t deleted !');
+      }
+    };
     $scope.all = NodeFact.getNodes();
     
   }]);

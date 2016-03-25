@@ -1,0 +1,26 @@
+<div class="container theme-showcase" role ="main">
+	<div class="page-header">
+	    <h1>Add a resource</h1>
+	</div>
+	<div class="row">
+	    <div class="col-md-6">
+			<h3>Parameters</h3>
+	   		<p>network_address (hostname) <span style="color:red">*</span>
+			  	<input type="text" name="hostname" size="50" placeholder="node1" ng-model="newRSC.hostname"/>
+			</p>  
+            <p>CPU ID <span style="color:red">*</span>
+            	<input type="text" name="cpu" size="50" placeholder="1" ng-model="newRSC.cpu"/>
+            </p>
+            <p>Core ID <span style="color:red">*</span>
+            	<input type="text" name="core" size="50" placeholder="1" ng-model="newRSC.core"/>
+            </p>
+            <p>MEM of this core
+            	<input type="text" name="mem" size="50" placeholder="4" ng-model="newRSC.mem"/>
+            </p>
+            <p>Others properties 
+            	<input type="text" name="properties" size="50" placeholder="besteffort=YES" ng-model="newRSC.properties"/>
+            </p>
+            <button ui-sref="dashboard.home" class="btn btn-success" ng-click="addRSC(newRSC)">Add this resource</button>
+	    </div>
+	</div>
+</div>

@@ -7,13 +7,13 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-  .controller('CreateCtrl', ['$scope', '$rootScope', 'TimeFact', 'JobFact', function ($scope, $rootScope, TimeFact, JobFact) {
+  .controller('CreateCtrl', ['$scope', '$rootScope', 'NodeFact', 'TimeFact', 'JobFact', function ($scope, $rootScope, NodeFact, TimeFact, JobFact) {
   	$scope.newJob = {};
     $scope.newJob['reservation']=TimeFact.getDate();
   	if('Core_ID' in $rootScope.RSC){ 
-      $scope.newJob['resource'] = "core="+$rootScope.RSC['Core_ID']+",walltime=00:30:00";
+      $scope.newJob['resource'] = "core="+$rootScope.RSC['Core_ID']+", rsc="+$rootScope.RSC['RSC_ID'];
     }
-    if('Properties' in $rootScope.RSC && $rootScope.RSC['Properties']['others'].match("besteffort=YES")){ 
+    if($rootScope.RSC['Properties']['besteffort']){ 
       $scope.newJob['properties'] = "besteffort"; 
     }
   	$scope.createJob = function(newJob){
@@ -21,7 +21,8 @@ angular.module('sbAdminApp')
         alert('Job created !\n'+JobFact.toString(newJob));
         JobFact.putJob(newJob);
         $scope.newJob = {};
-        $rootScope.Core_ID = '';        
+        $rootScope.Core_ID = '';   
+        NodeFact.changeNodeState(newJob,"Busy");     
       }else{
         alert('You have to give a name to your job !');
       }

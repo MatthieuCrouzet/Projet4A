@@ -35,54 +35,54 @@ angular
     };
     return factory;
   })
-    .factory('JobFact', function () {
+    .factory('JobFact', [ 'NodeFact', function (NodeFact) {
     var factory = {
       jobs : [
         {
-          "id" : 1,
           "name" : "job 1",
-          "resource" : "core=1,walltime=00:30:00",
+          "resource" : "core=1, rsc=1",
           "properties" : "besteffort",
           "command" : "/bin/sleep 1000",
           "reservation" : "2016-03-21 13:44:55",
-          "directory" : "/bin"
+          "directory" : "/bin",
+          "State" : "In progress"
         },
         {
-          "id" : 2,
           "name" : "job 2",
-          "resource" : "core=3,walltime=00:30:00",
+          "resource" : "core=3, rsc=3",
           "properties" : "besteffort",
           "command" : "/bin/sleep 500",
           "reservation" : "2016-03-11 13:44:55",
-          "directory" : "/bin"
+          "directory" : "/bin",
+          "State" : "Pending"
         },
         {
-          "id" : 3,
           "name" : "job 3",
-          "resource" : "core=2,walltime=00:30:00",
+          "resource" : "core=2, rsc=2",
           "properties" : "besteffort",
           "command" : "/bin/sleep 3000",
           "reservation" : "2016-03-27 13:44:55",
-          "directory" : "/bin"
+          "directory" : "/bin",
+          "State" : "Finish"
         },
         {
-          "id" : 4,
           "name" : "job 4",
-          "resource" : "core=1,walltime=00:30:00",
+          "resource" : "core=1, rsc=1",
           "properties" : "besteffort",
           "command" : "/bin/sleep 2000",
           "reservation" : "2016-03-21 13:54:55",
-          "directory" : "/bin"
+          "directory" : "/bin",
+          "State" : "In progress"
         }
       ],
       getJobs : function() {
         return factory.jobs;
       },
-      getJob : function(id) {
+      getJob : function(name) {
         var job = {};
         var jobs = factory.getJobs();
         angular.forEach(jobs, function(value, key){
-          if(value.id == id) {
+          if(value['name'] == name){
             job = value;
           }
         })
@@ -91,8 +91,33 @@ angular
       putJob : function(newJob) {
         factory.jobs.push(newJob);
       },
-      deleteJob : function(index) {
-        factory.jobs.splice(index,1);
+      stopJob : function(job) {
+        angular.forEach(factory.jobs, function(value, key){
+          if(value['name'] == job['name']){
+            value['State'] = "Finish";
+          }
+        })
+        NodeFact.changeNodeState(job,"Free");       
+      },
+      suspendJob : function(job) {
+        angular.forEach(factory.jobs, function(value, key){
+          if(value['name'] == job['name']){
+            value['State'] = "Pending";
+          }
+        })
+        NodeFact.changeNodeState(job,"Free");  
+      },
+      startJob : function(job) {
+        angular.forEach(factory.jobs, function(value, key){
+          if(value['name'] == job['name']){
+            value['State'] = "In progress";
+          }
+        })
+        NodeFact.changeNodeState(job,"Busy");  
+      },
+      sendJob : function(index){
+        $rootScope.RSC = factory.jobs[index];
+        NodeFact.changeNodeState(factory.jobs[index],"Busy");  
       },
       toString : function(job) {
         var name = "name : " + job.name;
@@ -106,75 +131,86 @@ angular
       }
     };
     return factory;
-  })
-    .factory('NodeFact',[ '$http', function ($http) {
+  }])
+    .factory('NodeFact',  function () {
     var factory = {
-     nodes : [
-       {
-           "hostname" : "node1",
-           "CPU_ID" : 1,
-           "Core_ID" : 1,
-           "RSC_ID" : 1,
-           "Alive" : true,
-           "State" : "Busy",
-           "Properties" : {
-              "mem" : 4,
-              "others" : "besteffort=YES"
-            }
-       },
-       {
-           "hostname" : "node1",
-           "CPU_ID" : 1,
-           "Core_ID" : 2,
-           "RSC_ID" : 2,
-           "Alive" : true,
-           "State" : "Free",
-           "Properties" : {
-              "mem" : 8,
-              "others" : "test2,besteffort=YES"
-            }
-       },
-       {
-          "hostname" : "node2",
-           "CPU_ID" : 2,
-           "Core_ID" : 3,
-           "RSC_ID" : 3,
-           "Alive" : false,
-           "State" : "Free",
-           "Properties" : {
-              "mem" : 4,
-              "others" : "test"
-            }
-       }
-     ],
-     newID : function(){
-        var id = 0;
-        var nodes = factory.getNodes();
-        angular.forEach(nodes, function(value, key){
-          if(value.id > id) {
-            id = value.id;
+      nodes : [
+         {
+             "hostname" : "node1",
+             "CPU_ID" : 1,
+             "Core_ID" : 1,
+             "RSC_ID" : 1,
+             "Alive" : true,
+             "State" : "Busy",
+             "Properties" : {
+                "mem" : 4,
+                "besteffort" : true,
+                "others" : ""
+              }
+         },
+         {
+             "hostname" : "node1",
+             "CPU_ID" : 1,
+             "Core_ID" : 2,
+             "RSC_ID" : 2,
+             "Alive" : true,
+             "State" : "Free",
+             "Properties" : {
+                "mem" : 8,
+                "besteffort" : true,
+                "others" : "test2"
+              }
+         },
+         {
+            "hostname" : "node2",
+             "CPU_ID" : 2,
+             "Core_ID" : 3,
+             "RSC_ID" : 3,
+             "Alive" : false,
+             "State" : "Free",
+             "Properties" : {
+                "mem" : 4,
+                "besteffort" : false,
+                "others" : "test"
+              }
+         }
+      ],
+      newID : function(){
+         var id = 0;
+         var nodes = factory.getNodes();
+         angular.forEach(nodes, function(value, key){
+           if(value['RSC_ID'] > id) {
+             id = value['RSC_ID'];
+           }
+         })
+         return id+1;
+      },
+      changeNodeState : function(job, state){
+        var core = "";
+        var rsc = "";
+        angular.forEach(factory.nodes, function(value, key){
+          core = "core="+value['Core_ID'];
+          rsc = "rsc="+value['RSC_ID'];
+          if(job['resource'].includes(core) && job['resource'].includes(rsc)){
+            value['State'] = state;
           }
         })
-        return id+1;
-     },
-     getNodes : function() {
-        return factory.nodes;
-     },
-      getNode : function(id) {
+      },
+      getNodes : function() {
+         return factory.nodes;
+      },
+      getNode : function(index) {
         var node = {};
         var nodes = factory.getNodes();
-        angular.forEach(nodes, function(value, key){
-          if(value.id == id) {
-            node = value;
-          }
-        })
-        return node;
+        return nodes[index];
       },
       putNode : function(newNode) {
         factory.nodes.push(newNode);
       },
       deleteNode : function(index) {
-        factory.nodes.splice(index,1);
+        var nodes = factory.getNodes();
+        nodes[index]['Alive'] = false;
+        nodes[index]['State'] = "Dead";
       },
       toString : function(node) {
         var hostname = "hostname : " + node.hostname;
@@ -188,13 +224,18 @@ angular
           alive = "\nIs alive : false";
         } 
         var state = "\nState : " + node.State;
-        var properties = "\nProperties : " + node.Properties; 
+        var properties = "";
+        if(node['Properties']['besteffort']==false){
+          properties = "\nProperties : \n\tType : No specified\n\tMemory : " + node['Properties']['mem'] + "\n\tOthers : " + node['Properties']['others'];
+        }else{ 
+         properties = "\nProperties : \n\tType : Besteffort\n\tMemory : " + node['Properties']['mem'] + "\n\tOthers : " + node['Properties']['others'];
+        }
         var string = hostname+cpu+core+rsc+alive+state+properties;
         return string;
       }
     };
     return factory;
-  }])
+  })
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
     $ocLazyLoadProvider.config({

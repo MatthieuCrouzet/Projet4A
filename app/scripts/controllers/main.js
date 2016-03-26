@@ -7,14 +7,15 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-  .controller('MainCtrl', ['$scope', '$rootScope', 'NodeFact', function($scope, $rootScope, NodeFact) {
+  .controller('MainCtrl', ['$scope', '$rootScope', 'NodeFact', 'JobFact', function($scope, $rootScope, NodeFact, JobFact) {
     $scope.user = "docker";
     $rootScope.RSC = {};
     $scope.getProperties = function(index){
-        alert("Properties : \n" + "\tMemory : " + $scope.all[index]['Properties']['mem'] + "\n\tOthers : " + $scope.all[index]['Properties']['others']);
+      var node = NodeFact.getNode(index);
+      alert(NodeFact.toString(node));
     };
     $scope.sendJob = function(index){
-      $rootScope.RSC = $scope.all[index];
+      JobFact.sendJob(index);
     };
     $scope.deleteRSC = function(index){
       var r = confirm("Are you sure you want to delete this resource?")

@@ -11,21 +11,42 @@ angular.module('sbAdminApp')
     $scope.newRSC = {};
     $scope.addRSC = function(newRSC){
       if('hostname' in $scope.newRSC && 'cpu' in $scope.newRSC && 'core' in $scope.newRSC){
-        var newNode = {
-          "hostname" : newRSC.hostname,
-          "CPU_ID" : newRSC.cpu,
-          "Core_ID" : newRSC.core,
-          "RSC_ID" : NodeFact.newID(),
-          "Alive" : true,
-          "State" : "Free",
-          "Properties" : {
-            "mem" : newRSC.mem,
-            "others" : newRSC.properties
-          }
-        };
-        NodeFact.putNode(newNode);
+        var nodes = NodeFact.getNodes();
+        var exist = false;
+        var nodeExist;
+        var cpuExist;
+        var coreExist;
+        angular.forEach(nodes, function(value, key){
+          nodeExist = (value['hostname'] == newRSC.hostname);
+          cpuExist = (value['CPU_ID'] == newRSC.cpu);
+          coreExist = (value['Core_ID'] == newRSC.core);
+          exist = exist || (nodeExist && cpuExist && coreExist);
+        })
+        if(exist){
+          var newNode = {
+            "hostname" : newRSC.hostname,
+            "CPU_ID" : newRSC.cpu,
+            "Core_ID" : newRSC.core,
+            "RSC_ID" : NodeFact.newID(),
+            "Alive" : true,
+            "State" : "Free",
+            "Properties" : {
+              "mem" : newRSC.mem,
+              "besteffort" : newRSC.besteffort,
+              "others" : newRSC.properties
+            }
+          };
+          NodeFact.putNode(newNode);
+        }else{
+          alert('This resource doesn\'t exist !');
+        }
       }else{
-      alert('You have to complete all fields with * !');
+        alert('You have to complete all fields with * !');
       }
-    }
+    };
+
+
+
+
+
 }]);

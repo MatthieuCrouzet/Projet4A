@@ -9,16 +9,45 @@
 angular.module('sbAdminApp')
  .controller('InfoCtrl', ['$scope', 'JobFact' , function ($scope, JobFact) {
   	$scope.user = "docker";
-  	$scope.deleteJob = function(index){
-      var r = confirm("Are you sure you want to delete this job?")
+    $scope.jobs = JobFact.getJobs();
+  	$scope.stopJob = function(job){
+      var r = confirm("Are you sure you want to stop this job?")
       if(r==true){
-        alert('The job have been deleted');
-        JobFact.deleteJob(index);
+        alert('The job have been stopped');
+        JobFact.stopJob(job);
       }
       else {
-        alert('The job wasn\'t deleted !');
+        alert('The job wasn\'t stopped !');
       }
     };
-    $scope.jobs = JobFact.getJobs();
+    $scope.suspendJob = function(job){
+      var r = confirm("Are you sure you want to suspend this job?")
+      if(r==true){
+        alert('The job have been suspend');
+        JobFact.suspendJob(job);
+      }
+      else {
+        alert('The job wasn\'t suspended !');
+      }  
+    }
+    $scope.restartJob = function(job){
+      var r = confirm("Are you sure you want to restart this job?")
+      if(r==true){
+        alert('The job have been restart');
+        JobFact.startJob(job);
+      }
+      else {
+        alert('The job wasn\'t restarted !');
+      }  
+    }
+    $scope.order = function(job){
+      if(job['State']=='Finish'){
+        return 3;
+      }else if(job['State']=='Pending'){
+        return 2;
+      }else{
+        return 1;
+      }
+    }
   }]);
 

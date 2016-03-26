@@ -3,35 +3,48 @@
         <h1 class="page-header"> Current Jobs</h1>
     </div>
 </div>
-<div>
-    <table class="table striped-rows">
-            <tr>
-                <td>Name</td>
-                <td></td><td>Resource</td>
-                <td></td><td>Properties</td>
-                <td></td><td>Command</td>
-                <td></td><td>Reservation</td>
-                <td></td><td>Directory</td>
-            </tr>
-        <tbody>
-            <tr ng-repeat="job in jobs">
-                <td>{{job.name}}</td>
-                <td></td><td>{{job.resource}}</td>
-                <td></td><td>{{job.properties}}</td>
-                <td></td><td>{{job.command}}</td>
-                <td></td><td>{{job.reservation}}</td>
-                <td></td><td>{{job.directory}}</td>
-                <td></td><td ng-show="user=='docker'"><button class="btn btn-danger" ng-click="deleteJob(job)">Delete the job</button></td>
-            </tr>
-    </table>
-</div>
-<div ng-repeat="job in jobs">
+<div ng-repeat="job in jobs | orderBy:order">
     <div class="col-lg-4">
-        <div class="panel panel-primary">
+        <div ng-show="job.State=='In progress'" class="panel panel-green">
+            <div class="panel-heading">
+                {{job.name}} 
+                <button type="button" class="btn btn-warning btn-circle" ng-click="suspendJob(job)"><i class="fa fa-pause"></i>
+                </button>
+                <button type="button" class="btn btn-danger btn-circle" ng-click="stopJob(job)"><i class="fa fa-stop"></i>
+                </button>
+            </div>
+            <div class="panel-body">
+                <p>State : {{job.State}}</p>
+                <p>Resources : {{job.resource}}</p>
+                <p>Properties : {{job.properties}}</p>
+                <p>Command : {{job.command}}</p>
+                <p>Reservation : {{job.reservation}}</p>
+                <p>Directory : {{job.directory}}</p>
+            </div>
+        </div>
+        <div ng-show="job.State=='Pending'" class="panel panel-yellow">
+            <div class="panel-heading">
+                {{job.name}}
+                <button type="button" class="btn btn-success btn-circle" ng-click="restartJob(job)"><i class="fa fa-play"></i>
+                </button>
+                <button type="button" class="btn btn-danger btn-circle" ng-click="stopJob(job)"><i class="fa fa-stop"></i>
+                </button>
+            </div>
+            <div class="panel-body">
+                <p>State : {{job.State}}</p>
+                <p>Resources : {{job.resource}}</p>
+                <p>Properties : {{job.properties}}</p>
+                <p>Command : {{job.command}}</p>
+                <p>Reservation : {{job.reservation}}</p>
+                <p>Directory : {{job.directory}}</p>
+            </div>
+        </div>
+        <div ng-show="job.State=='Finish'" class="panel panel-red">
             <div class="panel-heading">
                 {{job.name}}
             </div>
             <div class="panel-body">
+                <p>State : {{job.State}}</p>
                 <p>Resources : {{job.resource}}</p>
                 <p>Properties : {{job.properties}}</p>
                 <p>Command : {{job.command}}</p>

@@ -44,9 +44,4 @@ angular.module('sbAdminApp')
         alert('You have to complete all fields with * !');
       }
     };
-
-
-
-
-
 }]);

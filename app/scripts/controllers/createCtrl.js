@@ -13,7 +13,7 @@ angular.module('sbAdminApp')
   	if('Core_ID' in $rootScope.RSC){ 
       $scope.newJob['resource'] = "core="+$rootScope.RSC['Core_ID']+", rsc="+$rootScope.RSC['RSC_ID'];
     }
-    if($rootScope.RSC['Properties']['besteffort']){ 
+    if('Properties' in $rootScope.RSC && $rootScope.RSC['Properties']['besteffort']){ 
       $scope.newJob['properties'] = "besteffort"; 
     }
   	$scope.createJob = function(newJob){

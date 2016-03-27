@@ -3,54 +3,27 @@
         <h1 class="page-header"> Current Jobs</h1>
     </div>
 </div>
-<div ng-repeat="job in jobs | orderBy:order">
-    <div class="col-lg-4">
-        <div ng-show="job.State=='In progress'" class="panel panel-green">
-            <div class="panel-heading">
-                {{job.name}} 
-                <button type="button" class="btn btn-warning btn-circle" ng-click="suspendJob(job)"><i class="fa fa-pause"></i>
-                </button>
-                <button type="button" class="btn btn-danger btn-circle" ng-click="stopJob(job)"><i class="fa fa-stop"></i>
-                </button>
-            </div>
-            <div class="panel-body">
-                <p>State : {{job.State}}</p>
-                <p>Resources : {{job.resource}}</p>
-                <p>Properties : {{job.properties}}</p>
-                <p>Command : {{job.command}}</p>
-                <p>Reservation : {{job.reservation}}</p>
-                <p>Directory : {{job.directory}}</p>
-            </div>
-        </div>
-        <div ng-show="job.State=='Pending'" class="panel panel-yellow">
-            <div class="panel-heading">
-                {{job.name}}
-                <button type="button" class="btn btn-success btn-circle" ng-click="restartJob(job)"><i class="fa fa-play"></i>
-                </button>
-                <button type="button" class="btn btn-danger btn-circle" ng-click="stopJob(job)"><i class="fa fa-stop"></i>
-                </button>
-            </div>
-            <div class="panel-body">
-                <p>State : {{job.State}}</p>
-                <p>Resources : {{job.resource}}</p>
-                <p>Properties : {{job.properties}}</p>
-                <p>Command : {{job.command}}</p>
-                <p>Reservation : {{job.reservation}}</p>
-                <p>Directory : {{job.directory}}</p>
-            </div>
-        </div>
-        <div ng-show="job.State=='Finish'" class="panel panel-red">
-            <div class="panel-heading">
-                {{job.name}}
-            </div>
-            <div class="panel-body">
-                <p>State : {{job.State}}</p>
-                <p>Resources : {{job.resource}}</p>
-                <p>Properties : {{job.properties}}</p>
-                <p>Command : {{job.command}}</p>
-                <p>Reservation : {{job.reservation}}</p>
-                <p>Directory : {{job.directory}}</p>
-            </div>
-        </div>
+<div class="row">
+    <h2>Search Settings</h2>
+    <label>Strict <input type="checkbox" ng-model="strict"></label>
+    <div class="form-group">
+        <label>State </label>
+        <input type="radio" name="options" id="option1" ng-model="search.State" value="In progress">In progress
+        <input type="radio" name="options" id="option2" ng-model="search.State" value="Pending">Pending
+        <input type="radio" name="options" id="option3" ng-model="search.State" value="Finish">Finish
+        <input type="radio" name="options" id="option4" ng-model="search.State" value="">All
+    </div>
+    <ng-search name="Name :" model="search.name"></ng-search>
+    <ng-search name="Resources :" model="search.resource"></ng-search>
+    <ng-search name="Properties :" model="search.properties"></ng-search>
+    <ng-search name="Command :" model="search.command"></ng-search>
+    <ng-search name="Reservation :" model="search.reservation"></ng-search>
+    <ng-search name="Directory :" model="search.directory"></ng-search>
+    <ng-search name="Any :" model="search.$"></ng-search> 
+</div>
+<div class="row">
+    <h2>Results</h2>
+    <div ng-repeat="job in jobs | orderBy:order | filter:search:strict">
+        <ng-job job="job" suspend="suspendJob(job)" stop="stopJob(job)" restart="restartJob(job)"></ng-job>
     </div>
 </div>

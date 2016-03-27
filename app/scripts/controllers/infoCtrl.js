@@ -10,7 +10,7 @@ angular.module('sbAdminApp')
  .controller('InfoCtrl', ['$scope', 'JobFact' , function ($scope, JobFact) {
   	$scope.user = "docker";
     $scope.jobs = JobFact.getJobs();
-  	$scope.stopJob = function(job){
+      	$scope.stopJob = function(job){
       var r = confirm("Are you sure you want to stop this job?")
       if(r==true){
         alert('The job have been stopped');

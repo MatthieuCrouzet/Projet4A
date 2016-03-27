@@ -1,0 +1,53 @@
+<div class="col-lg-4">
+    <div ng-show="job.State=='In progress'" class="panel panel-green">
+        <div class="panel-heading">
+            <strong>{{job.name}}</strong> 
+            <span class="nav navbar-top-links navbar-right">
+	            <button type="button" class="btn btn-warning btn-circle" ng-click="suspend(job)"><i class="fa fa-pause"></i>
+	            </button>
+	            <button type="button" class="btn btn-danger btn-circle" ng-click="stop(job)"><i class="fa fa-stop"></i>
+	            </button>
+	        </span>
+        </div>
+        <div class="panel-body">
+            <p>State : {{job.State}}</p>
+            <p>Resources : {{job.resource}}</p>
+            <p>Properties : {{job.properties}}</p>
+            <p>Command : {{job.command}}</p>
+            <p>Reservation : {{job.reservation}}</p>
+            <p>Directory : {{job.directory}}</p>
+        </div>
+    </div>
+    <div ng-show="job.State=='Pending'" class="panel panel-yellow">
+        <div class="panel-heading">
+            <strong>{{job.name}}</strong>
+            <span class="nav navbar-top-links navbar-right">
+	            <button type="button" class="btn btn-success btn-circle" ng-click="restart(job)"><i class="fa fa-play"></i>
+	            </button>
+	            <button type="button" class="btn btn-danger btn-circle" ng-click="stop(job)"><i class="fa fa-stop"></i>
+	            </button>
+	        </span>
+        </div>
+        <div class="panel-body">
+            <p>State : {{job.State}}</p>
+            <p>Resources : {{job.resource}}</p>
+            <p>Properties : {{job.properties}}</p>
+            <p>Command : {{job.command}}</p>
+            <p>Reservation : {{job.reservation}}</p>
+            <p>Directory : {{job.directory}}</p>
+        </div>
+    </div>
+    <div ng-show="job.State=='Finish'" class="panel panel-red">
+        <div class="panel-heading">
+            <strong>{{job.name}}</strong>
+        </div>
+        <div class="panel-body">
+            <p>State : {{job.State}}</p>
+            <p>Resources : {{job.resource}}</p>
+            <p>Properties : {{job.properties}}</p>
+            <p>Command : {{job.command}}</p>
+            <p>Reservation : {{job.reservation}}</p>
+            <p>Directory : {{job.directory}}</p>
+        </div>
+    </div>
+</div>

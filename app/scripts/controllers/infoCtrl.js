@@ -12,59 +12,38 @@ angular.module('sbAdminApp')
     $scope.jobs = JobFact.getJobs();
     $scope.pie = {
       'data' : [],
-      'labels' : [
-        'In progress',
-        'Pending',
-        'Finish'
-      ]
+      'labels' : ['In progress', 'Pending', 'Finish' ],
+      'legend' : ['In progress', 'Pending', 'Finish' ],
+      'color' : ['green', 'yellow', 'red']
     };
     $scope.getStates = function(){
-      var inprogress = 0; 
-      var pending = 0; 
-      var finish = 0;
-      var states = [];
-      angular.forEach($scope.jobs,function(value, key){
-        if(value['State']=='In progress'){
-          inprogress++;
-        }else if(value['State']=='Pending'){
-          pending++;
-        }else if(value['State']=='Finish'){
-          finish++;
-        }
-      })
-      states.push(inprogress);
-      states.push(pending);
-      states.push(finish);
-      return states;
+      return JobFact.getStates();
     }
     $scope.$watchCollection('getStates',function(){
       $scope.pie['data'] = $scope.getStates();
     });
     $scope.stopJob = function(job){
-      var r = confirm("Are you sure you want to stop this job?")
-      if(r==true){
-        alert('The job have been stopped');
-        JobFact.stopJob(job);
-      }
-      else {
-        alert('The job wasn\'t stopped !');
-      }
+      var r = confirm("Are you sure you want to stop this job?");
+      var res = JobFact.stopJob(job);
+      alert('The job have been stopped');
     };
     $scope.suspendJob = function(job){
-      var r = confirm("Are you sure you want to suspend this job?")
-      if(r==true){
-        alert('The job have been suspend');
-        JobFact.suspendJob(job);
+      var r = confirm("Are you sure you want to suspend this job?");
+      var res = JobFact.suspendJob(job);
+      if(r==true && res==0){
+          alert('The job have been suspend');
       }
-      else {
+      else if(res==2){
+        alert('The job was stopped');
+      }else{
         alert('The job wasn\'t suspended !');
-      }  
+      } 
     }
     $scope.restartJob = function(job){
-      var r = confirm("Are you sure you want to restart this job?")
-      if(r==true){
-        alert('The job have been restart');
-        JobFact.startJob(job);
+      var r = confirm("Are you sure you want to restart this job?");
+      var res = JobFact.startJob(job);
+      if(r==true && res==0){
+          alert('The job have been restart');
       }
       else {
         alert('The job wasn\'t restarted !');

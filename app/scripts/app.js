@@ -49,7 +49,7 @@ angular
         },
         {
           "name" : "job 2",
-          "resource" : "core=3, rsc=3",
+          "resource" : "core=1, rsc=1",
           "properties" : "besteffort",
           "command" : "/bin/sleep 500",
           "reservation" : "2016-03-11 13:44:55",
@@ -67,7 +67,7 @@ angular
         },
         {
           "name" : "job 4",
-          "resource" : "core=1, rsc=1",
+          "resource" : "core=2, rsc=2",
           "properties" : "besteffort",
           "command" : "/bin/sleep 2000",
           "reservation" : "2016-03-21 13:54:55",
@@ -92,32 +92,79 @@ angular
         factory.jobs.push(newJob);
       },
       stopJob : function(job) {
+        var r = NodeFact.changeNodeState(job,"Finish");
         angular.forEach(factory.jobs, function(value, key){
           if(value['name'] == job['name']){
-            value['State'] = "Finish";
+            if(r==0){
+              value['State'] = "Finish"; 
+            } else if(r==2){
+              value['State'] = "Finish";
+            }         
           }
         })
-        NodeFact.changeNodeState(job,"Free");       
+        return r;     
       },
       suspendJob : function(job) {
+        var r = NodeFact.changeNodeState(job,"Free");
         angular.forEach(factory.jobs, function(value, key){
           if(value['name'] == job['name']){
-            value['State'] = "Pending";
+            if(r==0){
+              value['State'] = "Pending"; 
+            } else if(r==2){
+              value['State'] = "Finish";
+            }         
           }
         })
-        NodeFact.changeNodeState(job,"Free");  
+        return r; 
       },
       startJob : function(job) {
+        var r = NodeFact.changeNodeState(job,"Busy");
         angular.forEach(factory.jobs, function(value, key){
           if(value['name'] == job['name']){
-            value['State'] = "In progress";
+            if(r==0){
+              value['State'] = "In progress"; 
+            }else if(r==1){
+              value['State'] = "Pending";
+            } 
+            else if(r==2){
+              value['State'] = "Finish";
+            }         
           }
         })
-        NodeFact.changeNodeState(job,"Busy");  
+        return r; 
       },
-      sendJob : function(index){
+      nodeDeleted : function(node){
+        var core = "core="+node['Core_ID'];
+        var rsc = "rsc="+node['RSC_ID'];
+        angular.forEach(factory.getJobs(), function(value, key){
+          if(value['State']!='Finish' && value['resource'].includes(core) && value['resource'].includes(rsc)){
+            alert('The job \"'+value['name']+'\" has been stopped !');
+            value['State']="Finish";
+          }
+        })
+      },
+      sendJob : function(node){
         $rootScope.RSC = factory.jobs[index];
-        NodeFact.changeNodeState(factory.jobs[index],"Busy");  
+        factory.startJob(job); 
+      },    
+      getStates : function(){
+        var inprogress = 0; 
+        var pending = 0; 
+        var finish = 0;
+        var states = [];
+        angular.forEach(factory.jobs,function(value, key){
+          if(value['State']=='In progress'){
+            inprogress++;
+          }else if(value['State']=='Pending'){
+            pending++;
+          }else if(value['State']=='Finish'){
+            finish++;
+          }
+        })
+        states.push(inprogress);
+        states.push(pending);
+        states.push(finish);
+        return states;
       },
       toString : function(job) {
         var name = "name : " + job.name;
@@ -132,7 +179,7 @@ angular
     };
     return factory;
   }])
-    .factory('NodeFact',  function () {
+    .factory('NodeFact', [function () {
     var factory = {
       nodes : [
          {
@@ -167,7 +214,7 @@ angular
              "Core_ID" : 3,
              "RSC_ID" : 3,
              "Alive" : false,
-             "State" : "Free",
+             "State" : "Dead",
              "Properties" : {
                 "mem" : 4,
                 "besteffort" : false,
@@ -188,13 +235,26 @@ angular
       changeNodeState : function(job, state){
         var core = "";
         var rsc = "";
+        var r = -1;
         angular.forEach(factory.nodes, function(value, key){
           core = "core="+value['Core_ID'];
           rsc = "rsc="+value['RSC_ID'];
           if(job['resource'].includes(core) && job['resource'].includes(rsc)){
-            value['State'] = state;
+            if(value['State']!='Dead'){
+              if(value['State']==state){
+                alert('This resource is already '+state);
+                r = 1;
+              }else {
+                value['State'] = state;
+                r = 0;
+              }
+            }else{
+              alert('This resource is Dead');
+              r = 2;
+            }
           }
         })
+        return r;
       },
       getNodes : function() {
          return factory.nodes;
@@ -208,9 +268,8 @@ angular
         factory.nodes.push(newNode);
       },
       deleteNode : function(index) {
-        var nodes = factory.getNodes();
-        nodes[index]['Alive'] = false;
-        nodes[index]['State'] = "Dead";
+        factory.nodes[index]['Alive'] = false;
+        factory.nodes[index]['State'] = "Dead";
       },
       toString : function(node) {
         var hostname = "hostname : " + node.hostname;
@@ -235,7 +294,7 @@ angular
       }
     };
     return factory;
-  })
+  }])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
     $ocLazyLoadProvider.config({
@@ -366,7 +425,14 @@ angular
         controller:'InfoCtrl',
         resolve: {
           loadMyFile:function($ocLazyLoad) {
-            return $ocLazyLoad.load({
+            $ocLazyLoad.load({
+              name:'chart.js',
+              files:[
+                'bower_components/angular-chart.js/dist/angular-chart.min.js',
+                'bower_components/angular-chart.js/dist/angular-chart.css'
+              ]
+            }),
+            $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
                 'scripts/controllers/infoCtrl.js',

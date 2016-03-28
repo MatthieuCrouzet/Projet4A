@@ -20,8 +20,9 @@ angular.module('sbAdminApp')
     $scope.deleteRSC = function(index){
       var r = confirm("Are you sure you want to delete this resource?")
       if(r==true){
-        alert('This resource have been deleted');
         NodeFact.deleteNode(index);
+        JobFact.nodeDeleted(NodeFact.getNode(index))
+        alert('This resource have been deleted');
       }
       else {
         alert('The resource wasn\'t deleted !');

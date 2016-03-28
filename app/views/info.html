@@ -4,6 +4,16 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-lg-6 col-sm-12" id="pie-chart">
+        <div class="panel panel-default">
+            <div class="panel-heading">Distribution of job's state</div>
+            <div class="panel-body">
+                <canvas id="pie" class="chart chart-pie chart-xs" data="pie.data" labels="pie.labels"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
     <h2>Search Settings</h2>
     <label>Strict <input type="checkbox" ng-model="strict"></label>
     <div class="form-group">

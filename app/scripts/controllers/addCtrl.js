@@ -16,29 +16,36 @@ angular.module('sbAdminApp')
         var nodeExist;
         var cpuExist;
         var coreExist;
+        
         angular.forEach(nodes, function(value, key){
-          nodeExist = (value['hostname'] == newRSC.hostname);
+          nodeExist = (value['hostname'] == newRSC.hostname); 
           cpuExist = (value['CPU_ID'] == newRSC.cpu);
           coreExist = (value['Core_ID'] == newRSC.core);
           exist = exist || (nodeExist && cpuExist && coreExist);
         })
-        if(exist){
-          var newNode = {
-            "hostname" : newRSC.hostname,
-            "CPU_ID" : newRSC.cpu,
-            "Core_ID" : newRSC.core,
-            "RSC_ID" : NodeFact.newID(),
-            "Alive" : true,
-            "State" : "Free",
-            "Properties" : {
-              "mem" : newRSC.mem,
-              "besteffort" : newRSC.besteffort,
-              "others" : newRSC.properties
-            }
-          };
-          NodeFact.putNode(newNode);
+        var cpuNumber = Number(newRSC.cpu);
+        var coreNumber = Number(newRSC.core);
+        if(!cpuNumber || !coreNumber){
+          alert('The CPU_ID or the Core_ID isn\'t a number !');
         }else{
-          alert('This resource doesn\'t exist !');
+          if(exist){
+            var newNode = {
+              "hostname" : newRSC.hostname,
+              "CPU_ID" : newRSC.cpu,
+              "Core_ID" : newRSC.core,
+              "RSC_ID" : NodeFact.newID(),
+              "Alive" : true,
+              "State" : "Free",
+              "Properties" : {
+                "mem" : newRSC.mem,
+                "besteffort" : newRSC.besteffort,
+                "others" : newRSC.properties
+              }
+            };
+            NodeFact.putNode(newNode);
+          }else{
+            alert('This resource doesn\'t exist !');
+          }
         }
       }else{
         alert('You have to complete all fields with * !');

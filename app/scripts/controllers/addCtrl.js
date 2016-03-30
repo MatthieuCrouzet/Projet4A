@@ -10,45 +10,36 @@ angular.module('sbAdminApp')
   .controller('AddCtrl', ['$scope', 'NodeFact', function ($scope, NodeFact) {
     $scope.newRSC = {};
     $scope.addRSC = function(newRSC){
-      if('hostname' in $scope.newRSC && 'cpu' in $scope.newRSC && 'core' in $scope.newRSC){
-        var nodes = NodeFact.getNodes();
-        var exist = false;
-        var nodeExist;
-        var cpuExist;
-        var coreExist;
-        
-        angular.forEach(nodes, function(value, key){
-          nodeExist = (value['hostname'] == newRSC.hostname); 
-          cpuExist = (value['CPU_ID'] == newRSC.cpu);
-          coreExist = (value['Core_ID'] == newRSC.core);
-          exist = exist || (nodeExist && cpuExist && coreExist);
-        })
-        var cpuNumber = Number(newRSC.cpu);
-        var coreNumber = Number(newRSC.core);
-        if(!cpuNumber || !coreNumber){
-          alert('The CPU_ID or the Core_ID isn\'t a number !');
-        }else{
-          if(exist){
-            var newNode = {
-              "hostname" : newRSC.hostname,
-              "CPU_ID" : newRSC.cpu,
-              "Core_ID" : newRSC.core,
-              "RSC_ID" : NodeFact.newID(),
-              "Alive" : true,
-              "State" : "Free",
-              "Properties" : {
-                "mem" : newRSC.mem,
-                "besteffort" : newRSC.besteffort,
-                "others" : newRSC.properties
-              }
-            };
-            NodeFact.putNode(newNode);
+      var cpuNumber = Number(newRSC.cpu);
+      var coreNumber = Number(newRSC.core);
+      if(!cpuNumber || !coreNumber){
+        alert('The CPU_ID or the Core_ID isn\'t a number !');
+      }else if('hostname' in $scope.newRSC && 'cpu' in $scope.newRSC && 'core' in $scope.newRSC){
+          var nodes = NodeFact.getNodes();
+          var rscExist = false;        
+          angular.forEach(nodes, function(value, key){
+            rscExist = rscExist || (value['Core_ID'] == newRSC.core);
+          })
+          if(!rscExist){
+          var newNode = {
+            "hostname" : newRSC.hostname,
+            "CPU_ID" : newRSC.cpu,
+            "Core_ID" : newRSC.core,
+            "Alive" : true,
+            "State" : "Free",
+            "Properties" : {
+              "mem" : newRSC.mem,
+              "besteffort" : newRSC.besteffort,
+              "others" : newRSC.properties
+            }
+          };
+          NodeFact.putNode(newNode);
+          alert('The resource has been created !')
           }else{
-            alert('This resource doesn\'t exist !');
+            alert('This resource already exists !');
           }
+        }else{
+          alert('You have to complete all fields with * !');
         }
-      }else{
-        alert('You have to complete all fields with * !');
-      }
     };
 }]);

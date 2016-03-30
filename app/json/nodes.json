@@ -1,0 +1,41 @@
+[
+         {
+             "hostname" : "node1",
+             "CPU_ID" : 1,
+             "Core_ID" : 1,
+             "RSC_ID" : 1,
+             "Alive" : true,
+             "State" : "Busy",
+             "Properties" : {
+                "mem" : 4,
+                "besteffort" : true,
+                "others" : ""
+              }
+         },
+         {
+             "hostname" : "node1",
+             "CPU_ID" : 1,
+             "Core_ID" : 2,
+             "RSC_ID" : 2,
+             "Alive" : true,
+             "State" : "Free",
+             "Properties" : {
+                "mem" : 8,
+                "besteffort" : true,
+                "others" : "test2"
+              }
+         },
+         {
+            "hostname" : "node2",
+             "CPU_ID" : 2,
+             "Core_ID" : 3,
+             "RSC_ID" : 3,
+             "Alive" : false,
+             "State" : "Dead",
+             "Properties" : {
+                "mem" : 4,
+                "besteffort" : false,
+                "others" : "test"
+              }
+         }
+      ]

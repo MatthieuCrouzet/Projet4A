@@ -15,7 +15,6 @@
 </div>
 <div class="row">
     <h2>Search Settings</h2>
-    <label>Strict <input type="checkbox" ng-model="strict"></label>
     <div class="form-group">
         <label>State </label>
         <input type="radio" name="options" id="option1" ng-model="search.State" value="In progress">In progress
@@ -33,7 +32,7 @@
 </div>
 <div class="row">
     <h2>Results</h2>
-    <div ng-repeat="job in jobs | orderBy:order | filter:search:strict">
+    <div ng-repeat="job in jobs | orderBy:order | filter:search">
         <ng-job job="job" suspend="suspendJob(job)" stop="stopJob(job)" restart="restartJob(job)"></ng-job>
     </div>
 </div>

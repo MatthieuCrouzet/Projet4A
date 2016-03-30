@@ -1,0 +1,43 @@
+<div class="row">
+    <head>
+        Informations about {{rsc.hostname}}
+    </head>
+</div>
+<div>
+<table class="table table-striped">
+    <tr>
+        <td>Hostname</td>
+        <td>{{rsc.hostname}}</td>
+    </tr>
+    <tr>
+        <td>CPU ID</td>
+        <td>{{rsc.CPU_ID}}</td>
+    </tr>
+    <tr>
+        <td>Core ID</td>
+        <td>{{rsc.Core_ID}}</td>
+    </tr>
+    <tr>
+        <td>Alive</td>
+        <td>{{rsc.Alive}}</td>
+    </tr>
+    <tr>
+        <td>State</td>
+        <td>{{rsc.State}}</td>
+    </tr>
+    <tr>
+        <td>Memory</td>
+        <td>{{rsc.Preperties.mem}}</td>
+    </tr>
+    <tr>
+        <td>Besteffort</td>
+        <td ng-show="rsc.Properties.mem">YES</td>
+        <td ng-hide="rsc.Properties.mem">NO</td>
+    </tr>
+    <tr>
+        <td>Others properties</td>
+        <td>{{rsc.Properties.others}}</td>
+    </tr>
+</table>
+</div>
+<button ng-click="test()">RAZ</button>

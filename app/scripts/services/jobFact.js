@@ -7,47 +7,55 @@
  * Factory of the sbAdminApp
  */
 angular.module('sbAdminApp')
-    .factory('JobFact', [ 'NodeFact', '$rootScope', function (NodeFact, $rootScope) {
-    var factory = {
-      jobs : [
-        {
-          "name" : "job 1",
-          "resource" : "core=1, rsc=1",
-          "properties" : "besteffort",
-          "command" : "/bin/sleep 1000",
-          "reservation" : "2016-03-21 13:44:55",
-          "directory" : "/bin",
-          "State" : "In progress"
-        },
-        {
-          "name" : "job 2",
-          "resource" : "core=1, rsc=1",
-          "properties" : "besteffort",
-          "command" : "/bin/sleep 500",
-          "reservation" : "2016-03-11 13:44:55",
-          "directory" : "/bin",
-          "State" : "Pending"
-        },
-        {
-          "name" : "job 3",
-          "resource" : "core=2, rsc=2",
-          "properties" : "besteffort",
-          "command" : "/bin/sleep 3000",
-          "reservation" : "2016-03-27 13:44:55",
-          "directory" : "/bin",
-          "State" : "Finish"
-        },
-        {
-          "name" : "job 4",
-          "resource" : "core=2, rsc=2",
-          "properties" : "besteffort",
-          "command" : "/bin/sleep 2000",
-          "reservation" : "2016-03-21 13:54:55",
-          "directory" : "/bin",
-          "State" : "In progress"
-        }
-      ],
+    .factory('JobFact', [ 'NodeFact', '$rootScope', '$http', function (NodeFact, $rootScope, $http) {
+      var factory = {
+      // jobs : [
+      //     {
+      //       "name" : "job 1",
+      //       "resource" : "core=1",
+      //       "properties" : "besteffort",
+      //       "command" : "/bin/sleep 1000",
+      //       "reservation" : "2016-03-21 13:44:55",
+      //       "directory" : "/bin",
+      //       "State" : "In progress"
+      //     },
+      //     {
+      //       "name" : "job 2",
+      //       "resource" : "core=1",
+      //       "properties" : "besteffort",
+      //       "command" : "/bin/sleep 500",
+      //       "reservation" : "2016-03-11 13:44:55",
+      //       "directory" : "/bin",
+      //       "State" : "Pending"
+      //     },
+      //     {
+      //       "name" : "job 3",
+      //       "resource" : "core=2",
+      //       "properties" : "besteffort",
+      //       "command" : "/bin/sleep 3000",
+      //       "reservation" : "2016-03-27 13:44:55",
+      //       "directory" : "/bin",
+      //       "State" : "Finish"
+      //     },
+      //     {
+      //       "name" : "job 4",
+      //       "resource" : "core=2",
+      //       "properties" : "besteffort",
+      //       "command" : "/bin/sleep 2000",
+      //       "reservation" : "2016-03-21 13:54:55",
+      //       "directory" : "/bin",
+      //       "State" : "In progress"
+      //     }
+      // ],
+      jobs : [],
       getJobs : function() {
+        // $http.get('http://localhost:48080/oarapi-priv/resources.json').then(function(success){
+        //   factory.jobs = success.data;
+        //   console.log('data.api_timestamp');
+        //   console.log(success.data.api_timestamp);
+        // }, function(error){
+        //   console.log('Erreur chargement du fichier jobs.json');
+        // });
         return factory.jobs;
       },
       getJob : function(name) {
@@ -107,18 +115,13 @@ angular.module('sbAdminApp')
       },
       nodeDeleted : function(node){
         var core = "core="+node['Core_ID'];
-        var rsc = "rsc="+node['RSC_ID'];
         angular.forEach(factory.getJobs(), function(value, key){
-          if(value['State']!='Finish' && value['resource'].includes(core) && value['resource'].includes(rsc)){
+          if(value['State']!='Finish' && value['resource'].includes(core)){
             alert('The job \"'+value['name']+'\" has been stopped !');
             value['State']="Finish";
           }
         })
-      },
-      sendJob : function(node){
-        $rootScope.RSC = factory.jobs[index];
-        factory.startJob(job); 
-      },    
+      },  
       getStates : function(){
         var inprogress = 0; 
         var pending = 0; 

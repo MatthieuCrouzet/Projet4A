@@ -10,12 +10,15 @@ angular.module('sbAdminApp')
   .controller('MainCtrl', ['$scope', '$rootScope', 'NodeFact', 'JobFact', function($scope, $rootScope, NodeFact, JobFact) {
     $scope.user = "docker";
     $rootScope.RSC = {};
-    $scope.getProperties = function(index){
-      var node = NodeFact.getNode(index);
+    $scope.order = function(elem){
+      return elem['hostname'];
+    }
+    $scope.getProperties = function(node){
       alert(NodeFact.toString(node));
+      $rootScope.RSC = node;
     };
-    $scope.sendJob = function(index){
-      JobFact.sendJob(index);
+    $scope.sendJob = function(node){
+      $rootScope.RSC = node;
     };
     $scope.deleteRSC = function(index){
       var r = confirm("Are you sure you want to delete this resource?")

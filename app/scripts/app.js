@@ -24,6 +24,10 @@ angular
     $urlRouterProvider.otherwise('/dashboard/home');
 
     $stateProvider
+      .state('test',{
+        templateUrl:'json/jobs.json',
+        url:'/test.json'
+      })
       .state('dashboard', {
         url:'/dashboard',
         templateUrl: 'views/dashboard/main.html',
@@ -36,6 +40,7 @@ angular
                     'scripts/directives/header/header.js',
                     'scripts/directives/header/header-notification/header-notification.js',
                     'scripts/directives/sidebar/sidebar.js',
+                    'scripts/directives/search/search.js',
                     'scripts/services/timeFact.js',
                     'scripts/services/nodeFact.js',
                     'scripts/services/jobFact.js'
@@ -108,6 +113,10 @@ angular
         templateUrl:'views/pages/login.html',
         url:'/login'
     })
+      .state('error404',{
+        templateUrl:'views/pages/notfound.html',
+        url:'/error404'
+    })
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',
         url:'/chart',
@@ -158,8 +167,7 @@ angular
               name:'sbAdminApp',
               files:[
                 'scripts/controllers/infoCtrl.js',
-                'scripts/directives/job/job.js',
-                'scripts/directives/search/search.js'
+                'scripts/directives/job/job.js'
               ]
             })
           }
@@ -205,6 +213,19 @@ angular
       .state('dashboard.grid',{
        templateUrl:'views/ui-elements/grid.html',
        url:'/grid'
+   })
+      .state('dashboard.infoRSC',{
+       templateUrl:'views/detail.html',
+       url:'/info/detail/core?id={core}',
+       controller:'DetailCtrl',
+       resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/detailCtrl.js']
+            })
+          }
+        }
    })
   }]);
 

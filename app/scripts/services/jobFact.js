@@ -7,7 +7,7 @@
  * Factory of the sbAdminApp
  */
 angular.module('sbAdminApp')
-    .factory('JobFact', [ 'NodeFact', '$rootScope', '$http', function (NodeFact, $rootScope, $http) {
+    .factory('JobFact', [ 'rscFact', '$rootScope', '$http', function (rscFact, $rootScope, $http) {
       var factory = {
       // jobs : [
       //     {
@@ -49,13 +49,15 @@ angular.module('sbAdminApp')
       // ],
       jobs : [],
       getJobs : function() {
-        // $http.get('http://localhost:48080/oarapi-priv/resources.json').then(function(success){
-        //   factory.jobs = success.data;
-        //   console.log('data.api_timestamp');
-        //   console.log(success.data.api_timestamp);
-        // }, function(error){
-        //   console.log('Erreur chargement du fichier jobs.json');
-        // });
+        $.ajax({
+          url: 'http://localhost:48080/oarapi/resources.json',
+          success : function(data){
+            factory.jobs = JSON.parse(data);
+          },
+          error : function(data){
+            alert('jobs non chargés');
+          }
+        })
         return factory.jobs;
       },
       getJob : function(name) {
@@ -72,7 +74,7 @@ angular.module('sbAdminApp')
         factory.jobs.push(newJob);
       },
       stopJob : function(job) {
-        var r = NodeFact.changeNodeState(job,"Finish");
+        var r = rscFact.changeRSCState(job,"Finish");
         angular.forEach(factory.jobs, function(value, key){
           if(value['name'] == job['name']){
             if(r==0){
@@ -85,7 +87,7 @@ angular.module('sbAdminApp')
         return r;     
       },
       suspendJob : function(job) {
-        var r = NodeFact.changeNodeState(job,"Free");
+        var r = rscFact.changeRSCState(job,"Free");
         angular.forEach(factory.jobs, function(value, key){
           if(value['name'] == job['name']){
             if(r==0){
@@ -98,7 +100,7 @@ angular.module('sbAdminApp')
         return r; 
       },
       startJob : function(job) {
-        var r = NodeFact.changeNodeState(job,"Busy");
+        var r = rscFact.changeRSCState(job,"Busy");
         angular.forEach(factory.jobs, function(value, key){
           if(value['name'] == job['name']){
             if(r==0){

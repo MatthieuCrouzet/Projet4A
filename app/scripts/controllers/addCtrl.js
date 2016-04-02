@@ -7,7 +7,7 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-  .controller('AddCtrl', ['$scope', 'NodeFact', function ($scope, NodeFact) {
+  .controller('AddCtrl', ['$scope', 'rscFact', function ($scope, rscFact) {
     $scope.newRSC = {};
     $scope.addRSC = function(newRSC){
       var cpuNumber = Number(newRSC.cpu);
@@ -15,10 +15,10 @@ angular.module('sbAdminApp')
       if(!cpuNumber || !coreNumber){
         alert('The CPU_ID or the Core_ID isn\'t a number !');
       }else if('hostname' in $scope.newRSC && 'cpu' in $scope.newRSC && 'core' in $scope.newRSC){
-          var nodes = NodeFact.getNodes();
+          var nodes = rscFact.getResources();
           var rscExist = false;        
           angular.forEach(nodes, function(value, key){
-            rscExist = rscExist || (value['Core_ID'] == newRSC.core);
+            rscExist = rscExist || (value['id'] == newRSC.core);
           })
           if(!rscExist){
           var newNode = {
@@ -33,7 +33,7 @@ angular.module('sbAdminApp')
               "others" : newRSC.properties
             }
           };
-          NodeFact.putNode(newNode);
+          rscFact.putRSC(newNode);
           alert('The resource has been created !')
           }else{
             alert('This resource already exists !');

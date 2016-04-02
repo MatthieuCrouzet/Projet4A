@@ -24,10 +24,6 @@ angular
     $urlRouterProvider.otherwise('/dashboard/home');
 
     $stateProvider
-      .state('test',{
-        templateUrl:'json/jobs.json',
-        url:'/test.json'
-      })
       .state('dashboard', {
         url:'/dashboard',
         templateUrl: 'views/dashboard/main.html',
@@ -42,7 +38,7 @@ angular
                     'scripts/directives/sidebar/sidebar.js',
                     'scripts/directives/search/search.js',
                     'scripts/services/timeFact.js',
-                    'scripts/services/nodeFact.js',
+                    'scripts/services/rscFact.js',
                     'scripts/services/jobFact.js'
                     ]
                 }),
@@ -216,7 +212,7 @@ angular
    })
       .state('dashboard.infoRSC',{
        templateUrl:'views/detail.html',
-       url:'/info/detail/core?id={core}',
+       url:'/info/detail/id={core}',
        controller:'DetailCtrl',
        resolve: {
           loadMyFile:function($ocLazyLoad) {

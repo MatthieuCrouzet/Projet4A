@@ -1,0 +1,18 @@
+<div class="row">
+    <h1>
+        Informations about the {{type}} {{id}}
+    </h1>
+</div>
+<div ng-hide="error">
+	<ng-search name="Attribut : " model="search.name"></ng-search>
+	<table class="table table-striped">
+	    <tr ng-repeat="attribut in attributs | orderBy:'name' | filter:search">
+	        <td>{{attribut.name}}</td>
+	        <td>{{attribut.val}}</td>
+	    </tr>
+	</table>
+</div>
+
+<div ng-show="error">
+	<h2>Error : {{errorText}}</h2>
+</div>

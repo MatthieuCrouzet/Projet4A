@@ -10,468 +10,512 @@ angular.module('sbAdminApp')
     .factory('rscFact', ['$http', 'TimeFact', function ($http, TimeFact) {
     var factory = {
       resources : [
-            {
-               "network_address" : "node1",
-               "links" : [
-                  {
-                     "href" : "/oarapi/resources.json/resources/nodes/node1",
-                     "rel" : "member",
-                     "title" : "node"
-                  },
-                  {
-                     "rel" : "self",
-                     "href" : "/oarapi/resources.json/resources/1"
-                  },
-                  {
-                     "rel" : "collection",
-                     "title" : "jobs",
-                     "href" : "/oarapi/resources.json/resources/1/jobs"
-                  }
-               ],
-               "state" : "Alive",
-               "api_timestamp" : 1459592799,
-               "id" : 1,
-               "available_upto" : 2147483647
-            },
-            {
-               "state" : "Alive",
-               "links" : [
-                  {
-                     "title" : "node",
-                     "rel" : "member",
-                     "href" : "/oarapi/resources.json/resources/nodes/node1"
-                  },
-                  {
-                     "rel" : "self",
-                     "href" : "/oarapi/resources.json/resources/2"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/2/jobs",
-                     "rel" : "collection",
-                     "title" : "jobs"
-                  }
-               ],
-               "network_address" : "node1",
-               "available_upto" : 2147483647,
-               "id" : 2,
-               "api_timestamp" : 1459592799
-            },
-            {
-               "id" : 3,
-               "available_upto" : 2147483647,
-               "api_timestamp" : 1459592799,
-               "state" : "Alive",
-               "links" : [
-                  {
-                     "title" : "node",
-                     "rel" : "member",
-                     "href" : "/oarapi/resources.json/resources/nodes/node1"
-                  },
-                  {
-                     "rel" : "self",
-                     "href" : "/oarapi/resources.json/resources/3"
-                  },
-                  {
-                     "title" : "jobs",
-                     "rel" : "collection",
-                     "href" : "/oarapi/resources.json/resources/3/jobs"
-                  }
-               ],
-               "network_address" : "node1"
-            },
-            {
-               "links" : [
-                  {
-                     "title" : "node",
-                     "rel" : "member",
-                     "href" : "/oarapi/resources.json/resources/nodes/node1"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/4",
-                     "rel" : "self"
-                  },
-                  {
-                     "rel" : "collection",
-                     "title" : "jobs",
-                     "href" : "/oarapi/resources.json/resources/4/jobs"
-                  }
-               ],
-               "state" : "Alive",
-               "network_address" : "node1",
-               "api_timestamp" : 1459592799,
-               "id" : 4,
-               "available_upto" : 2147483647
-            },
-            {
-               "id" : 5,
-               "available_upto" : 2147483647,
-               "api_timestamp" : 1459592799,
-               "network_address" : "node2",
-               "state" : "Alive",
-               "links" : [
-                  {
-                     "href" : "/oarapi/resources.json/resources/nodes/node2",
-                     "rel" : "member",
-                     "title" : "node"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/5",
-                     "rel" : "self"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/5/jobs",
-                     "title" : "jobs",
-                     "rel" : "collection"
-                  }
-               ]
-            },
-            {
-               "links" : [
-                  {
-                     "href" : "/oarapi/resources.json/resources/nodes/node2",
-                     "rel" : "member",
-                     "title" : "node"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/6",
-                     "rel" : "self"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/6/jobs",
-                     "title" : "jobs",
-                     "rel" : "collection"
-                  }
-               ],
-               "state" : "Alive",
-               "network_address" : "node2",
-               "api_timestamp" : 1459592799,
-               "available_upto" : 2147483647,
-               "id" : 6
-            },
-            {
-               "api_timestamp" : 1459592799,
-               "id" : 7,
-               "available_upto" : 2147483647,
-               "network_address" : "node2",
-               "links" : [
-                  {
-                     "rel" : "member",
-                     "title" : "node",
-                     "href" : "/oarapi/resources.json/resources/nodes/node2"
-                  },
-                  {
-                     "rel" : "self",
-                     "href" : "/oarapi/resources.json/resources/7"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/7/jobs",
-                     "title" : "jobs",
-                     "rel" : "collection"
-                  }
-               ],
-               "state" : "Alive"
-            },
-            {
-               "api_timestamp" : 1459592799,
-               "id" : 8,
-               "available_upto" : 2147483647,
-               "links" : [
-                  {
-                     "rel" : "member",
-                     "title" : "node",
-                     "href" : "/oarapi/resources.json/resources/nodes/node2"
-                  },
-                  {
-                     "rel" : "self",
-                     "href" : "/oarapi/resources.json/resources/8"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/8/jobs",
-                     "rel" : "collection",
-                     "title" : "jobs"
-                  }
-               ],
-               "state" : "Alive",
-               "network_address" : "node2"
-            },
-            {
-               "network_address" : "node3",
-               "state" : "Alive",
-               "links" : [
-                  {
-                     "href" : "/oarapi/resources.json/resources/nodes/node3",
-                     "title" : "node",
-                     "rel" : "member"
-                  },
-                  {
-                     "rel" : "self",
-                     "href" : "/oarapi/resources.json/resources/9"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/9/jobs",
-                     "rel" : "collection",
-                     "title" : "jobs"
-                  }
-               ],
-               "id" : 9,
-               "available_upto" : 2147483647,
-               "api_timestamp" : 1459592799
-            },
-            {
-               "network_address" : "node3",
-               "state" : "Alive",
-               "links" : [
-                  {
-                     "title" : "node",
-                     "rel" : "member",
-                     "href" : "/oarapi/resources.json/resources/nodes/node3"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/10",
-                     "rel" : "self"
-                  },
-                  {
-                     "rel" : "collection",
-                     "title" : "jobs",
-                     "href" : "/oarapi/resources.json/resources/10/jobs"
-                  }
-               ],
-               "id" : 10,
-               "available_upto" : 2147483647,
-               "api_timestamp" : 1459592799
-            },
-            {
-               "available_upto" : 2147483647,
-               "id" : 11,
-               "api_timestamp" : 1459592799,
-               "state" : "Alive",
-               "links" : [
-                  {
-                     "href" : "/oarapi/resources.json/resources/nodes/node3",
-                     "title" : "node",
-                     "rel" : "member"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/11",
-                     "rel" : "self"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/11/jobs",
-                     "title" : "jobs",
-                     "rel" : "collection"
-                  }
-               ],
-               "network_address" : "node3"
-            },
-            {
-               "available_upto" : 2147483647,
-               "id" : 12,
-               "api_timestamp" : 1459592799,
-               "network_address" : "node3",
-               "state" : "Alive",
-               "links" : [
-                  {
-                     "title" : "node",
-                     "rel" : "member",
-                     "href" : "/oarapi/resources.json/resources/nodes/node3"
-                  },
-                  {
-                     "rel" : "self",
-                     "href" : "/oarapi/resources.json/resources/12"
-                  },
-                  {
-                     "rel" : "collection",
-                     "title" : "jobs",
-                     "href" : "/oarapi/resources.json/resources/12/jobs"
-                  }
-               ]
-            },
-            {
-               "links" : [
-                  {
-                     "href" : "/oarapi/resources.json/resources/nodes/node4",
-                     "rel" : "member",
-                     "title" : "node"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/13",
-                     "rel" : "self"
-                  },
-                  {
-                     "title" : "jobs",
-                     "rel" : "collection",
-                     "href" : "/oarapi/resources.json/resources/13/jobs"
-                  }
-               ],
-               "state" : "Alive",
-               "network_address" : "node4",
-               "api_timestamp" : 1459592799,
-               "available_upto" : 2147483647,
-               "id" : 13
-            },
-            {
-               "api_timestamp" : 1459592799,
-               "available_upto" : 2147483647,
-               "id" : 14,
-               "links" : [
-                  {
-                     "rel" : "member",
-                     "title" : "node",
-                     "href" : "/oarapi/resources.json/resources/nodes/node4"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/14",
-                     "rel" : "self"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/14/jobs",
-                     "title" : "jobs",
-                     "rel" : "collection"
-                  }
-               ],
-               "state" : "Alive",
-               "network_address" : "node4"
-            },
-            {
-               "available_upto" : 2147483647,
-               "id" : 15,
-               "api_timestamp" : 1459592799,
-               "network_address" : "node4",
-               "state" : "Alive",
-               "links" : [
-                  {
-                     "href" : "/oarapi/resources.json/resources/nodes/node4",
-                     "rel" : "member",
-                     "title" : "node"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/15",
-                     "rel" : "self"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/15/jobs",
-                     "title" : "jobs",
-                     "rel" : "collection"
-                  }
-               ]
-            },
-            {
-               "network_address" : "node4",
-               "links" : [
-                  {
-                     "rel" : "member",
-                     "title" : "node",
-                     "href" : "/oarapi/resources.json/resources/nodes/node4"
-                  },
-                  {
-                     "rel" : "self",
-                     "href" : "/oarapi/resources.json/resources/16"
-                  },
-                  {
-                     "rel" : "collection",
-                     "title" : "jobs",
-                     "href" : "/oarapi/resources.json/resources/16/jobs"
-                  }
-               ],
-               "state" : "Alive",
-               "api_timestamp" : 1459592799,
-               "id" : 16,
-               "available_upto" : 2147483647
-            },
-            {
-               "links" : [
-                  {
-                     "title" : "node",
-                     "rel" : "member",
-                     "href" : "/oarapi/resources.json/resources/nodes/node5"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/17",
-                     "rel" : "self"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/17/jobs",
-                     "rel" : "collection",
-                     "title" : "jobs"
-                  }
-               ],
-               "state" : "Alive",
-               "network_address" : "node5",
-               "api_timestamp" : 1459592799,
-               "available_upto" : 2147483647,
-               "id" : 17
-            },
-            {
-               "available_upto" : 2147483647,
-               "id" : 18,
-               "api_timestamp" : 1459592799,
-               "network_address" : "node5",
-               "state" : "Alive",
-               "links" : [
-                  {
-                     "href" : "/oarapi/resources.json/resources/nodes/node5",
-                     "rel" : "member",
-                     "title" : "node"
-                  },
-                  {
-                     "rel" : "self",
-                     "href" : "/oarapi/resources.json/resources/18"
-                  },
-                  {
-                     "rel" : "collection",
-                     "title" : "jobs",
-                     "href" : "/oarapi/resources.json/resources/18/jobs"
-                  }
-               ]
-            },
-            {
-               "network_address" : "node5",
-               "links" : [
-                  {
-                     "rel" : "member",
-                     "title" : "node",
-                     "href" : "/oarapi/resources.json/resources/nodes/node5"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/19",
-                     "rel" : "self"
-                  },
-                  {
-                     "href" : "/oarapi/resources.json/resources/19/jobs",
-                     "title" : "jobs",
-                     "rel" : "collection"
-                  }
-               ],
-               "state" : "Alive",
-               "api_timestamp" : 1459592799,
-               "available_upto" : 2147483647,
-               "id" : 19
-            },
-            {
-               "api_timestamp" : 1459592799,
-               "id" : 20,
-               "available_upto" : 2147483647,
-               "links" : [
-                  {
-                     "rel" : "member",
-                     "title" : "node",
-                     "href" : "/oarapi/resources.json/resources/nodes/node5"
-                  },
-                  {
-                     "rel" : "self",
-                     "href" : "/oarapi/resources.json/resources/20"
-                  },
-                  {
-                     "rel" : "collection",
-                     "title" : "jobs",
-                     "href" : "/oarapi/resources.json/resources/20/jobs"
-                  }
-               ],
-               "state" : "Alive",
-               "network_address" : "node5"
-            }
-         ],
-      newID : function(){
+               {
+                  "state_num" : 1,
+                  "last_job_date" : 0,
+                  "next_finaud_decision" : "NO",
+                  "mem" : 4,
+                  "network_address" : "node1",
+                  "drain" : "NO",
+                  "links" : [
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node1",
+                        "title" : "node",
+                        "rel" : "member"
+                     },
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/1",
+                        "rel" : "self"
+                     },
+                     {
+                        "rel" : "collection",
+                        "title" : "jobs",
+                        "href" : "/oarapi/resources/details.json/resources/1/jobs"
+                     }
+                  ],
+                  "cpu" : 1,
+                  "suspended_jobs" : "NO",
+                  "expiry_date" : 0,
+                  "deploy" : "NO",
+                  "id" : 1,
+                  "host" : "node1",
+                  "type" : "default",
+                  "scheduler_priority" : 0,
+                  "besteffort" : "YES",
+                  "core" : 1,
+                  "last_available_upto" : 0,
+                  "next_state" : "UnChanged",
+                  "api_timestamp" : 1459689646,
+                  "desktop_computing" : "NO",
+                  "cpuset" : 0,
+                  "finaud_decision" : "NO",
+                  "state" : "Alive",
+                  "available_upto" : 2147483647
+               },
+               {
+                  "core" : 2,
+                  "last_available_upto" : 0,
+                  "besteffort" : "YES",
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "api_timestamp" : 1459689646,
+                  "next_state" : "UnChanged",
+                  "desktop_computing" : "NO",
+                  "cpuset" : 1,
+                  "available_upto" : 2147483647,
+                  "finaud_decision" : "NO",
+                  "state" : "Alive",
+                  "drain" : "NO",
+                  "next_finaud_decision" : "NO",
+                  "mem" : 4,
+                  "network_address" : "node1",
+                  "last_job_date" : 0,
+                  "state_num" : 1,
+                  "expiry_date" : 0,
+                  "suspended_jobs" : "NO",
+                  "cpu" : 1,
+                  "links" : [
+                     {
+                        "rel" : "member",
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node1",
+                        "title" : "node"
+                     },
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/2",
+                        "rel" : "self"
+                     },
+                     {
+                        "title" : "jobs",
+                        "href" : "/oarapi/resources/details.json/resources/2/jobs",
+                        "rel" : "collection"
+                     }
+                  ],
+                  "id" : 2,
+                  "deploy" : "NO",
+                  "host" : "node1"
+               },
+               {
+                  "desktop_computing" : "NO",
+                  "cpuset" : 2,
+                  "state" : "Alive",
+                  "finaud_decision" : "NO",
+                  "available_upto" : 2147483647,
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "besteffort" : "YES",
+                  "last_available_upto" : 0,
+                  "core" : 3,
+                  "next_state" : "UnChanged",
+                  "api_timestamp" : 1459689646,
+                  "deploy" : "NO",
+                  "id" : 3,
+                  "host" : "node1",
+                  "state_num" : 1,
+                  "last_job_date" : 0,
+                  "mem" : 4,
+                  "next_finaud_decision" : "NO",
+                  "network_address" : "node1",
+                  "drain" : "NO",
+                  "links" : [
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node1",
+                        "title" : "node",
+                        "rel" : "member"
+                     },
+                     {
+                        "rel" : "self",
+                        "href" : "/oarapi/resources/details.json/resources/3"
+                     },
+                     {
+                        "rel" : "collection",
+                        "href" : "/oarapi/resources/details.json/resources/3/jobs",
+                        "title" : "jobs"
+                     }
+                  ],
+                  "cpu" : 1,
+                  "suspended_jobs" : "NO",
+                  "expiry_date" : 0
+               },
+               {
+                  "host" : "node1",
+                  "deploy" : "NO",
+                  "id" : 4,
+                  "links" : [
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node1",
+                        "title" : "node",
+                        "rel" : "member"
+                     },
+                     {
+                        "rel" : "self",
+                        "href" : "/oarapi/resources/details.json/resources/4"
+                     },
+                     {
+                        "title" : "jobs",
+                        "href" : "/oarapi/resources/details.json/resources/4/jobs",
+                        "rel" : "collection"
+                     }
+                  ],
+                  "cpu" : 1,
+                  "suspended_jobs" : "NO",
+                  "expiry_date" : 0,
+                  "state_num" : 1,
+                  "last_job_date" : 0,
+                  "network_address" : "node1",
+                  "mem" : 4,
+                  "next_finaud_decision" : "NO",
+                  "drain" : "NO",
+                  "finaud_decision" : "NO",
+                  "state" : "Alive",
+                  "available_upto" : 2147483647,
+                  "desktop_computing" : "NO",
+                  "cpuset" : 3,
+                  "next_state" : "UnChanged",
+                  "api_timestamp" : 1459689646,
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "besteffort" : "YES",
+                  "core" : 4,
+                  "last_available_upto" : 0
+               },
+               {
+                  "desktop_computing" : "NO",
+                  "cpuset" : 0,
+                  "available_upto" : 2147483647,
+                  "finaud_decision" : "NO",
+                  "state" : "Alive",
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "last_available_upto" : 0,
+                  "core" : 1,
+                  "besteffort" : "YES",
+                  "next_state" : "UnChanged",
+                  "api_timestamp" : 1459689646,
+                  "deploy" : "NO",
+                  "id" : 5,
+                  "host" : "node2",
+                  "last_job_date" : 0,
+                  "state_num" : 1,
+                  "drain" : "NO",
+                  "mem" : 4,
+                  "network_address" : "node2",
+                  "next_finaud_decision" : "NO",
+                  "links" : [
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node2",
+                        "title" : "node",
+                        "rel" : "member"
+                     },
+                     {
+                        "rel" : "self",
+                        "href" : "/oarapi/resources/details.json/resources/5"
+                     },
+                     {
+                        "rel" : "collection",
+                        "title" : "jobs",
+                        "href" : "/oarapi/resources/details.json/resources/5/jobs"
+                     }
+                  ],
+                  "expiry_date" : 0,
+                  "cpu" : 2,
+                  "suspended_jobs" : "NO"
+               },
+               {
+                  "finaud_decision" : "NO",
+                  "state" : "Alive",
+                  "available_upto" : 2147483647,
+                  "desktop_computing" : "NO",
+                  "cpuset" : 1,
+                  "api_timestamp" : 1459689646,
+                  "next_state" : "UnChanged",
+                  "besteffort" : "YES",
+                  "last_available_upto" : 0,
+                  "core" : 2,
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "host" : "node2",
+                  "id" : 6,
+                  "deploy" : "NO",
+                  "suspended_jobs" : "NO",
+                  "cpu" : 2,
+                  "expiry_date" : 0,
+                  "links" : [
+                     {
+                        "rel" : "member",
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node2",
+                        "title" : "node"
+                     },
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/6",
+                        "rel" : "self"
+                     },
+                     {
+                        "rel" : "collection",
+                        "title" : "jobs",
+                        "href" : "/oarapi/resources/details.json/resources/6/jobs"
+                     }
+                  ],
+                  "mem" : 4,
+                  "network_address" : "node2",
+                  "next_finaud_decision" : "NO",
+                  "drain" : "NO",
+                  "state_num" : 1,
+                  "last_job_date" : 0
+               },
+               {
+                  "drain" : "NO",
+                  "next_finaud_decision" : "NO",
+                  "mem" : 4,
+                  "network_address" : "node2",
+                  "last_job_date" : 0,
+                  "state_num" : 1,
+                  "expiry_date" : 0,
+                  "suspended_jobs" : "NO",
+                  "cpu" : 2,
+                  "links" : [
+                     {
+                        "rel" : "member",
+                        "title" : "node",
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node2"
+                     },
+                     {
+                        "rel" : "self",
+                        "href" : "/oarapi/resources/details.json/resources/7"
+                     },
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/7/jobs",
+                        "title" : "jobs",
+                        "rel" : "collection"
+                     }
+                  ],
+                  "id" : 7,
+                  "deploy" : "NO",
+                  "host" : "node2",
+                  "core" : 3,
+                  "last_available_upto" : 0,
+                  "besteffort" : "YES",
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "api_timestamp" : 1459689646,
+                  "next_state" : "UnChanged",
+                  "desktop_computing" : "NO",
+                  "cpuset" : 2,
+                  "available_upto" : 2147483647,
+                  "finaud_decision" : "NO",
+                  "state" : "Alive"
+               },
+               {
+                  "id" : 8,
+                  "deploy" : "NO",
+                  "host" : "node2",
+                  "drain" : "NO",
+                  "mem" : 4,
+                  "next_finaud_decision" : "NO",
+                  "network_address" : "node2",
+                  "last_job_date" : 0,
+                  "state_num" : 1,
+                  "expiry_date" : 0,
+                  "suspended_jobs" : "NO",
+                  "cpu" : 2,
+                  "links" : [
+                     {
+                        "title" : "node",
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node2",
+                        "rel" : "member"
+                     },
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/8",
+                        "rel" : "self"
+                     },
+                     {
+                        "rel" : "collection",
+                        "title" : "jobs",
+                        "href" : "/oarapi/resources/details.json/resources/8/jobs"
+                     }
+                  ],
+                  "desktop_computing" : "NO",
+                  "cpuset" : 3,
+                  "available_upto" : 2147483647,
+                  "finaud_decision" : "NO",
+                  "state" : "Alive",
+                  "last_available_upto" : 0,
+                  "core" : 4,
+                  "besteffort" : "YES",
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "api_timestamp" : 1459689646,
+                  "next_state" : "UnChanged"
+               },
+               {
+                  "state_num" : 1,
+                  "last_job_date" : 0,
+                  "mem" : 4,
+                  "next_finaud_decision" : "NO",
+                  "network_address" : "node3",
+                  "drain" : "NO",
+                  "links" : [
+                     {
+                        "rel" : "member",
+                        "title" : "node",
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node3"
+                     },
+                     {
+                        "rel" : "self",
+                        "href" : "/oarapi/resources/details.json/resources/9"
+                     },
+                     {
+                        "rel" : "collection",
+                        "title" : "jobs",
+                        "href" : "/oarapi/resources/details.json/resources/9/jobs"
+                     }
+                  ],
+                  "cpu" : 3,
+                  "suspended_jobs" : "NO",
+                  "expiry_date" : 0,
+                  "deploy" : "NO",
+                  "id" : 9,
+                  "host" : "node3",
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "besteffort" : "YES",
+                  "last_available_upto" : 0,
+                  "core" : 1,
+                  "next_state" : "UnChanged",
+                  "api_timestamp" : 1459689646,
+                  "desktop_computing" : "NO",
+                  "cpuset" : 0,
+                  "state" : "Alive",
+                  "finaud_decision" : "NO",
+                  "available_upto" : 2147483647
+               },
+               {
+                  "next_state" : "UnChanged",
+                  "api_timestamp" : 1459689646,
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "core" : 2,
+                  "last_available_upto" : 0,
+                  "besteffort" : "YES",
+                  "available_upto" : 2147483647,
+                  "state" : "Alive",
+                  "finaud_decision" : "NO",
+                  "desktop_computing" : "NO",
+                  "cpuset" : 1,
+                  "links" : [
+                     {
+                        "title" : "node",
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node3",
+                        "rel" : "member"
+                     },
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/10",
+                        "rel" : "self"
+                     },
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/10/jobs",
+                        "title" : "jobs",
+                        "rel" : "collection"
+                     }
+                  ],
+                  "expiry_date" : 0,
+                  "suspended_jobs" : "NO",
+                  "cpu" : 3,
+                  "last_job_date" : 0,
+                  "state_num" : 1,
+                  "drain" : "NO",
+                  "mem" : 4,
+                  "network_address" : "node3",
+                  "next_finaud_decision" : "NO",
+                  "host" : "node3",
+                  "deploy" : "NO",
+                  "id" : 10
+               },
+               {
+                  "state" : "Alive",
+                  "finaud_decision" : "NO",
+                  "available_upto" : 2147483647,
+                  "desktop_computing" : "NO",
+                  "cpuset" : 2,
+                  "api_timestamp" : 1459689646,
+                  "next_state" : "UnChanged",
+                  "besteffort" : "YES",
+                  "last_available_upto" : 0,
+                  "core" : 3,
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "host" : "node3",
+                  "id" : 11,
+                  "deploy" : "NO",
+                  "suspended_jobs" : "NO",
+                  "cpu" : 3,
+                  "expiry_date" : 0,
+                  "links" : [
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node3",
+                        "title" : "node",
+                        "rel" : "member"
+                     },
+                     {
+                        "rel" : "self",
+                        "href" : "/oarapi/resources/details.json/resources/11"
+                     },
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/11/jobs",
+                        "title" : "jobs",
+                        "rel" : "collection"
+                     }
+                  ],
+                  "network_address" : "node3",
+                  "mem" : 4,
+                  "next_finaud_decision" : "NO",
+                  "drain" : "NO",
+                  "state_num" : 1,
+                  "last_job_date" : 0
+               },
+               {
+                  "available_upto" : 2147483647,
+                  "state" : "Alive",
+                  "finaud_decision" : "NO",
+                  "desktop_computing" : "NO",
+                  "cpuset" : 3,
+                  "next_state" : "UnChanged",
+                  "api_timestamp" : 1459689646,
+                  "scheduler_priority" : 0,
+                  "type" : "default",
+                  "core" : 4,
+                  "last_available_upto" : 0,
+                  "besteffort" : "YES",
+                  "host" : "node3",
+                  "deploy" : "NO",
+                  "id" : 12,
+                  "links" : [
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/nodes/node3",
+                        "title" : "node",
+                        "rel" : "member"
+                     },
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/12",
+                        "rel" : "self"
+                     },
+                     {
+                        "href" : "/oarapi/resources/details.json/resources/12/jobs",
+                        "title" : "jobs",
+                        "rel" : "collection"
+                     }
+                  ],
+                  "expiry_date" : 0,
+                  "cpu" : 3,
+                  "suspended_jobs" : "NO",
+                  "last_job_date" : 0,
+                  "state_num" : 1,
+                  "drain" : "NO",
+                  "network_address" : "node3",
+                  "mem" : 4,
+                  "next_finaud_decision" : "NO"
+               }
+            ],
+      nextID : function(){
          var id = 0;
          var resources = factory.getResources();
          angular.forEach(resources, function(value, key){
@@ -505,16 +549,22 @@ angular.module('sbAdminApp')
         return r;
       },
       getResources : function() {
-        // $http.get('/app/json/resources.json').then(function(success){
-        //   factory.resources = success.data;
-        // }, function(error){
-        //   console.log('Erreur chargement du fichier resources.json');
+        //  $.ajax({
+        //     type: "GET",
+        //     url: "http://localhost:48080/oarapi/resources.json",
+        //     dataType: "jsonp",
+        //     success: function (xml) {
+        //         factory.resources = xml.items;
+        //     },
         // });
+    // $.getJSON('http://localhost:48080/oarapi/resources.json?callback=?', true, function(data) {
+    //     alert(data);
+    // });
         return factory.resources;
       },
       getRSC : function(id) {
         var rsc = {};
-        var resources = factory.getResources();
+        var resources = factory.resources;
         angular.forEach(resources, function(value,key){
           if(value['id']==id){
             rsc = value;

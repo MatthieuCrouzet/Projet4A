@@ -9,6 +9,10 @@
 angular.module('sbAdminApp')
     .factory('TimeFact', function () {
     var factory = {
+        getTime : function(){
+            var today = new Date();
+            return today.getTime();
+        },
         getDate : function() {
             var today = new Date();
             var dd = today.getDate();

@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"> Current Jobs</h1>
+    </div>
+</div>
+<!--<div class="row">
+    <div class="col-lg-6 col-sm-12" id="pie-chart">
+        <div class="panel panel-default">
+            <div class="panel-heading">Distribution of job's state</div>
+            <div class="panel-body">
+                <canvas id="pie" class="chart chart-pie chart-xs" data="pie.data" labels="pie.labels" legend="pie.labels"></canvas>
+            </div>
+        </div>
+    </div>
+</div>-->
+<div class="row">
+    <h2>Search Settings</h2>
+    <div class="form-group">
+        <label>State </label>
+        <input type="radio" name="options" id="option1" ng-model="search.State" value="Running">Running
+        <input type="radio" name="options" id="option2" ng-model="search.State" value="Pending">Pending
+        <input type="radio" name="options" id="option3" ng-model="search.State" value="Finish">Finish
+        <input type="radio" name="options" id="option4" ng-model="search.State" value="">All
+    </div>
+    <ng-search name="Name :" model="search.name"></ng-search>
+    <ng-search name="Resources :" model="search.resource"></ng-search>
+    <ng-search name="Properties :" model="search.properties"></ng-search>
+    <ng-search name="Command :" model="search.command"></ng-search>
+    <ng-search name="Reservation :" model="search.reservation"></ng-search>
+    <ng-search name="Directory :" model="search.directory"></ng-search>
+    <ng-search name="Any :" model="search.$"></ng-search> 
+</div>
+<div class="row">
+    <h2>Results</h2>
+    <div ng-repeat="job in jobs | orderBy:order | filter:search">
+        <ng-job job="job" suspend="suspendJob(job)" stop="stopJob(job)" restart="restartJob(job)"></ng-job>
+    </div>
+</div>

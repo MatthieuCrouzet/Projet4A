@@ -34,7 +34,6 @@ angular
                     name:'sbAdminApp',
                     files:[
                     'scripts/directives/header/header.js',
-                    'scripts/directives/header/header-notification/header-notification.js',
                     'scripts/directives/sidebar/sidebar.js',
                     'scripts/directives/search/search.js',
                     'scripts/services/timeFact.js',
@@ -80,89 +79,42 @@ angular
       .state('dashboard.home',{
         url:'/home',
         controller: 'MainCtrl',
-        templateUrl:'views/dashboard/home.html',
+        templateUrl:'views/rsc/home.html',
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
               'scripts/controllers/main.js',
-              'scripts/directives/timeline/timeline.js',
-              'scripts/directives/notifications/notifications.js',
-              'scripts/directives/chat/chat.js',
-              'scripts/directives/dashboard/stats/stats.js',
-              'scripts/directives/node/node.js'
+              'scripts/controllers/job/createCtrl.js'
               ]
             })
           }
         }
       })
-      .state('dashboard.form',{
-        templateUrl:'views/form.html',
-        url:'/form'
-    })
-      .state('dashboard.blank',{
-        templateUrl:'views/pages/blank.html',
-        url:'/blank'
-    })
-      .state('login',{
-        templateUrl:'views/pages/login.html',
-        url:'/login'
-    })
-      .state('error404',{
-        templateUrl:'views/pages/notfound.html',
-        url:'/error404'
-    })
-      .state('dashboard.chart',{
-        templateUrl:'views/chart.html',
-        url:'/chart',
-        controller:'ChartCtrl',
-        resolve: {
-          loadMyFile:function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name:'chart.js',
-              files:[
-                'bower_components/angular-chart.js/dist/angular-chart.min.js',
-                'bower_components/angular-chart.js/dist/angular-chart.css'
-              ]
-            }),
-            $ocLazyLoad.load({
-                name:'sbAdminApp',
-                files:['scripts/controllers/chartController.js']
-            })
-          }
-        }
-    })
       .state('dashboard.create',{
-        templateUrl:'views/create.html',
+        templateUrl:'views/job/create.html',
         url:'/create',
         controller:'CreateCtrl',
         resolve: {
           loadMyFile:function($ocLazyLoad) {
             $ocLazyLoad.load({
                 name:'sbAdminApp',
-                files:['scripts/controllers/createCtrl.js']
+                files:['scripts/controllers/job/createCtrl.js']
             })
           }
         }
     })
       .state('dashboard.info',{
-        templateUrl:'views/info.html',
-        url:'/info',
+        templateUrl:'views/job/info.html',
+        url:'/resources',
         controller:'InfoCtrl',
         resolve: {
           loadMyFile:function($ocLazyLoad) {
-            $ocLazyLoad.load({
-              name:'chart.js',
-              files:[
-                'bower_components/angular-chart.js/dist/angular-chart.min.js',
-                'bower_components/angular-chart.js/dist/angular-chart.css'
-              ]
-            }),
-            $ocLazyLoad.load({
+            return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
-                'scripts/controllers/infoCtrl.js',
+                'scripts/controllers/job/infoCtrl.js',
                 'scripts/directives/job/job.js'
               ]
             })
@@ -170,49 +122,34 @@ angular
         }
     })
       .state('dashboard.add',{
-        templateUrl:'views/add.html',
+        templateUrl:'views/rsc/add.html',
         url:'/add',
         controller:'AddCtrl',
         resolve: {
           loadMyFile:function($ocLazyLoad) {
             $ocLazyLoad.load({
                 name:'sbAdminApp',
-                files:['scripts/controllers/addCtrl.js']
+                files:['scripts/controllers/rsc/addCtrl.js']
             })
           }
         }
     })
-      .state('dashboard.table',{
-        templateUrl:'views/table.html',
-        url:'/table'
-    })
-      .state('dashboard.panels-wells',{
-          templateUrl:'views/ui-elements/panels-wells.html',
-          url:'/panels-wells'
-      })
-      .state('dashboard.buttons',{
-        templateUrl:'views/ui-elements/buttons.html',
-        url:'/buttons'
-    })
-      .state('dashboard.notifications',{
-        templateUrl:'views/ui-elements/notifications.html',
-        url:'/notifications'
-    })
-      .state('dashboard.typography',{
-       templateUrl:'views/ui-elements/typography.html',
-       url:'/typography'
-   })
-      .state('dashboard.icons',{
-       templateUrl:'views/ui-elements/icons.html',
-       url:'/icons'
-   })
-      .state('dashboard.grid',{
-       templateUrl:'views/ui-elements/grid.html',
-       url:'/grid'
-   })
       .state('dashboard.infoRSC',{
-       templateUrl:'views/detail.html',
-       url:'/info/detail/id={core}',
+       templateUrl:'views/dashboard/detail.html',
+       url:'/resources/detail/id={core}',
+       controller:'DetailCtrl',
+       resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/detailCtrl.js']
+            })
+          }
+        }
+   })
+      .state('dashboard.infoJob',{
+       templateUrl:'views/dashboard/detail.html',
+       url:'/jobs/detail/id={core}',
        controller:'DetailCtrl',
        resolve: {
           loadMyFile:function($ocLazyLoad) {

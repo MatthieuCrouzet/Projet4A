@@ -7,10 +7,30 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-  .controller('DetailCtrl', ['$scope', 'rscFact', 'TimeFact', '$location', function($scope, rscFact, TimeFact, $location){
+  .controller('DetailCtrl', ['$scope', 'rscFact', 'JobFact', '$location', function($scope, rscFact, JobFact, $location){
     var url = $location.url();
-    url = url.split('=');
-    var id = url[url.length-1]
-  	$scope.rsc = rscFact.getRSC(id);
-  	$scope.available_upto = TimeFact.getDate($scope.rsc.api_timestamp,$scope.rsc.available_upto);
+    var params = url.split('/');
+    var paramID = params[params.length-1].split('=');
+    $scope.error = false;
+    $scope.type = params[params.length-3];    
+    $scope.id = paramID[paramID.length-1];
+  	if($scope.type=='resources'){
+      $scope.objet = rscFact.getRSC($scope.id);
+      $scope.type = 'resource';
+    }else if($scope.type=='jobs'){
+      $scope.objet = JobFact.getJob($scope.id);
+      $scope.type=='job'
+    }
+    $scope.attributs = [];
+    if(!angular.equals({}, $scope.objet)){
+    	for(var i in $scope.objet){
+    		var attribut = {};
+    		attribut.name = i;
+    		attribut.val = $scope.objet[i];
+    		$scope.attributs.push(attribut);
+    	}
+    }else{
+      $scope.error = true;
+      $scope.errorText = "This "+$scope.type+" doesn\'t exist !";
+    }
   }])

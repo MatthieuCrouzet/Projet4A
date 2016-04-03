@@ -1,0 +1,29 @@
+<div class="container theme-showcase" role ="main">
+	<div class="page-header">
+	    <h1>Add a resource</h1>
+	</div>
+	<div class="row">
+	    <div class="col-md-6">
+		<h3>Parameters</h3>
+   		<p>Hostname<br>
+		  	 <input type="text" name="hostname" size="20" placeholder="nodeXX" ng-model="newRSC.network_address" required>
+		   </p>  
+         <p>CPU ID<br>
+            <input type="number" name="cpu" size="50" ng-model="newRSC.cpu" min="1" required>
+         </p>
+         <p>CORE ID<br>
+         	<input type="number" name="core" size="50" ng-model="newRSC.core" min="1" required>
+         </p>
+         <p>MEM<br>
+            <input type="number" name="mem" size="50" ng-model="newRSC.mem" min="1" required>
+         </p>
+         <p>
+               <span>
+                     <input type="checkbox" name="besteffort" ng-true-value="'YES'" ng-false-value="'NO'" ng-model="newRSC.besteffort">
+                     Besteffort
+               </span>
+         </p>
+         <button class="btn btn-success fa fa-plus-circle" ng-click="addRSC(newRSC)"> Add this resource</button>
+	    </div>
+	</div>
+</div>

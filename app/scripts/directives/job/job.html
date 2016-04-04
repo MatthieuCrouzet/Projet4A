@@ -1,58 +1,16 @@
 <div class="col-lg-4">
-    <div ng-show="job.state=='Running'" class="panel panel-green">
+    <div class="panel panel-{{color(job.state)}}">
         <div class="panel-heading">
             <strong ng-show="job.name">Name : {{job.name}} ID : {{job.id}}</strong> 
             <strong ng-hide="job.name">ID : {{job.id}}</strong> 
             <span class="nav navbar-top-links navbar-right">
-	            <button type="button" class="btn btn-warning btn-circle" ng-click="suspend(job)"><i class="fa fa-pause"></i>
+	            <button ng-show="job.state=='Running'" type="button" class="btn btn-warning btn-circle" ng-click="suspend(job)"><i class="fa fa-pause"></i>
 	            </button>
-	            <button type="button" class="btn btn-danger btn-circle" ng-click="stop(job)"><i class="fa fa-stop"></i>
-	            </button>
-	        </span>
-        </div>
-        <div class="panel-body">
-            <p>State : {{job.state}}</p>
-            <p>Owner : {{job.owner}}</p>
-            <p>Type : {{job.type}}</p>
-            <p>Command : {{job.command}}</p>
-        </div>
-        <a ui-sref="dashboard.infoJob({core:job.id})">
-            <div class="panel-footer">
-                <span class="pull-left">View Details</span>
-                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                <div class="clearfix"></div>
-            </div>
-        </a>
-    </div>
-    <div ng-show="job.state=='Pending'" class="panel panel-yellow">
-        <div class="panel-heading">
-            <strong ng-show="job.name">Name : {{job.name}} ID : {{job.id}}</strong> 
-            <strong ng-hide="job.name">ID : {{job.id}}</strong> 
-            <span class="nav navbar-top-links navbar-right">
-	            <button type="button" class="btn btn-success btn-circle" ng-click="restart(job)"><i class="fa fa-play"></i>
-	            </button>
-	            <button type="button" class="btn btn-danger btn-circle" ng-click="stop(job)"><i class="fa fa-stop"></i>
+                <button ng-show="job.state=='Pending'" type="button" class="btn btn-success btn-circle" ng-click="restart(job)"><i class="fa fa-play"></i>
+                </button>
+	            <button ng-hide="job.state=='Finish'" type="button" class="btn btn-danger btn-circle" ng-click="stop(job)"><i class="fa fa-stop"></i>
 	            </button>
 	        </span>
-        </div>
-        <div class="panel-body">
-            <p>State : {{job.state}}</p>
-            <p>Owner : {{job.owner}}</p>
-            <p>Type : {{job.type}}</p>
-            <p>Command : {{job.command}}</p>
-        </div>
-        <a ui-sref="dashboard.infoJob({core:job.id})">
-            <div class="panel-footer">
-                <span class="pull-left">View Details</span>
-                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                <div class="clearfix"></div>
-            </div>
-        </a>
-    </div>
-    <div ng-show="job.state=='Finish'" class="panel panel-red">
-        <div class="panel-heading">
-            <strong ng-show="job.name">Name : {{job.name}} ID : {{job.id}}</strong> 
-            <strong ng-hide="job.name">ID : {{job.id}}</strong> 
         </div>
         <div class="panel-body">
             <p>State : {{job.state}}</p>

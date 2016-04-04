@@ -525,41 +525,23 @@ angular.module('sbAdminApp')
          })
          return id+1;
       },
-      changeRSCState : function(job, state){
-        var core = "";
-        var rsc = "";
-        var r = -1;
-        angular.forEach(factory.resources, function(value, key){
-          core = "core="+value['id'];
-          if(job['resource'].includes(core)){
-            if(value['state']!='Dead'){
-              if(value['state']==state){
-                alert('This resource is already '+state);
-                r = 1;
-              }else {
-                value['state'] = state;
-                r = 0;
-              }
-            }else{
-              alert('This resource is Dead');
-              r = 2;
-            }
-          }
-        })
-        return r;
+      changeRSCState : function(rscID, state){
+         var resources = factory.getResources();
+         angular.forEach(resources, function(value, key){
+           if(value['id'] == rscID) {
+             value.state = state;
+           }
+         })
       },
       getResources : function() {
         //  $.ajax({
         //     type: "GET",
         //     url: "http://localhost:48080/oarapi/resources.json",
         //     dataType: "jsonp",
-        //     success: function (xml) {
-        //         factory.resources = xml.items;
-        //     },
+        //     success: function (data) {
+        //         factory.resources = data.items;
+        //     }
         // });
-    // $.getJSON('http://localhost:48080/oarapi/resources.json?callback=?', true, function(data) {
-    //     alert(data);
-    // });
         return factory.resources;
       },
       getRSC : function(id) {

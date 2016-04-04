@@ -23,17 +23,14 @@ angular.module('sbAdminApp')
     });
     $scope.stopJob = function(job){
       var r = confirm("Are you sure you want to stop this job?");
-      var res = JobFact.stopJob(job);
+      JobFact.stopJob(job);
       alert('The job have been stopped');
     };
     $scope.suspendJob = function(job){
       var r = confirm("Are you sure you want to suspend this job?");
-      var res = JobFact.suspendJob(job);
-      if(r==true && res==0){
+      JobFact.suspendJob(job);
+      if(r==true){
           alert('The job have been suspend');
-      }
-      else if(res==2){
-        alert('The job was stopped');
       }else{
         alert('The job wasn\'t suspended !');
       } 
@@ -41,7 +38,7 @@ angular.module('sbAdminApp')
     $scope.restartJob = function(job){
       var r = confirm("Are you sure you want to restart this job?");
       var res = JobFact.startJob(job);
-      if(r==true && res==0){
+      if(r==true){
           alert('The job have been restart');
       }
       else {
@@ -49,9 +46,9 @@ angular.module('sbAdminApp')
       }  
     }
     $scope.order = function(job){
-      if(job['State']=='Finish'){
+      if(job['state']=='Finish'){
         return 3;
-      }else if(job['State']=='Pending'){
+      }else if(job['state']=='Pending'){
         return 2;
       }else{
         return 1;

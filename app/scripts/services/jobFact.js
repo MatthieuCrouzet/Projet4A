@@ -220,46 +220,34 @@ angular.module('sbAdminApp')
         factory.jobs.push(newJob);
       },
       stopJob : function(job) {
-        var r = rscFact.changeRSCState(job,"Finish");
         angular.forEach(factory.jobs, function(value, key){
           if(value['id'] == job['id']){
-            if(r==0){
-              value['state'] = "Finish"; 
-            } else if(r==2){
-              value['state'] = "Finish";
-            }         
+              value['state'] = "Finish";   
           }
+        })     
+        angular.forEach(job.resources, function(value, key){
+          rscFact.changeRSCState(value.id,"Free");
         })
-        return r;     
       },
       suspendJob : function(job) {
-        var r = rscFact.changeRSCState(job,"Free");
         angular.forEach(factory.jobs, function(value, key){
           if(value['id'] == job['id']){
-            if(r==0){
-              value['state'] = "Pending"; 
-            } else if(r==2){
-              value['state'] = "Finish";
-            }         
+              value['state'] = "Pending";   
           }
+        })     
+        angular.forEach(job.resources, function(value, key){
+          rscFact.changeRSCState(value.id,"Free");
         })
-        return r; 
       },
       startJob : function(job) {
-        var r = rscFact.changeRSCState(job,"Busy");
         angular.forEach(factory.jobs, function(value, key){
           if(value['id'] == job['id']){
-            if(r==0){
-              value['state'] = "Running"; 
-            }else if(r==1){
-              value['state'] = "Pending";
-            } 
-            else if(r==2){
-              value['state'] = "Finish";
-            }         
+              value['state'] = "Running";   
           }
+        })     
+        angular.forEach(job.resources, function(value, key){
+          rscFact.changeRSCState(value.id,"Busy");
         })
-        return r; 
       },
       rscDeleted : function(id){
         var b;

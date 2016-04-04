@@ -1,5 +1,0 @@
-#!/bin/bash
-WORKDIR=$1
-CMD="${@:2}"
-
-cd $WORKDIR && eval "$CMD"

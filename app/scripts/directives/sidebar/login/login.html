@@ -1,0 +1,8 @@
+<div ng-hide="isConnect()">
+    <input placeholder="Username" name="username" type="text" ng-model="username" autofocus>
+    <input placeholder="Password" name="password" type="password" ng-model="password">
+    <button class="btn btn-lg btn-success btn-block" ng-click="login(username, password)"> Login</button>
+</div>
+<div ng-show="isConnect()">
+    <button class="btn btn-lg btn-danger btn-block" ng-click="logout()"> Logout</button>
+</div>

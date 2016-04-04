@@ -1,4 +1,4 @@
-<div class="container theme-showcase" role ="main">
+<div ng-show="username=='oar'" class="container theme-showcase" role ="main">
 	<div class="page-header">
 	    <h1>Add a resource</h1>
 	</div>
@@ -27,3 +27,4 @@
 	    </div>
 	</div>
 </div>
+<ng-error text="You aren't logged as oar ! You can't access to this page !" hide="username=='oar'"></ng-error>

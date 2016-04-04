@@ -35,7 +35,9 @@ angular
                     files:[
                     'scripts/directives/header/header.js',
                     'scripts/directives/sidebar/sidebar.js',
+                    'scripts/directives/sidebar/login/login.js',
                     'scripts/directives/search/search.js',
+                    'scripts/directives/error/error.js',
                     'scripts/services/timeFact.js',
                     'scripts/services/rscFact.js',
                     'scripts/services/jobFact.js'
@@ -85,7 +87,7 @@ angular
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
-              'scripts/controllers/main.js',
+              'scripts/controllers/rsc/main.js',
               'scripts/controllers/job/createCtrl.js'
               ]
             })

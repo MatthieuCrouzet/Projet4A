@@ -7,26 +7,17 @@
 	        </div>
         </div>
     </div>
-<!--<div class="row">
-    <div class="col-lg-6 col-sm-12" id="pie-chart">
-        <div class="panel panel-default">
-            <div class="panel-heading">Resources state</div>
-            <div class="panel-body">
-                <canvas id="pie" class="chart chart-pie chart-xs" data="pie.data" labels="pie.labels" legend="pie.labels"></canvas>
-            </div>
-        </div>
-    </div>
-</div>-->
 
-    	    	<span>
-	    		<ng-search name="Hostname :" model="search.network_address"></ng-search>
-				<ng-search name="ID :" model="search.id"></ng-search>
-				<label>State :</label>
-				<span><input type="radio" name="options" id="option1" ng-model="search.state" value="Alive">Alive
-				<input type="radio" name="options" id="option2" ng-model="search.state" value="Busy">Busy
-		    	<input type="radio" name="options" id="option3" ng-model="search.state" value="Dead">Dead
-		    	<input type="radio" name="options" id="option4" ng-model="search.state" value="">All
-	    		</span></span>
+    <ng-search name="Hostname :" model="search.network_address"></ng-search>
+	<ng-search name="ID :" model="search.id"></ng-search>
+	<label>State :</label>
+		<span>
+			<input type="radio" name="options" id="option1" ng-model="search.state" value="Alive">Alive
+			<input type="radio" name="options" id="option2" ng-model="search.state" value="Absent">Absent
+		   	<input type="radio" name="options" id="option3" ng-model="search.state" value="Dead">Dead
+		   	<input type="radio" name="options" id="option4" ng-model="search.state" value="">All
+    	</span>
+
     <table class="table">
     		<tr>
     			<td class="center">Hostname</td>
@@ -34,21 +25,22 @@
 	    		<td></td><td class="center">CPU ID</td>
 	    		<td></td><td class="center">CORE ID</td>
 	    		<td></td><td class="center">State</td>
-	    		<td></td><td class="center">Properties</td>
+	    		<td></td><td class="center">Properties</td><td></td><td></td>
 	    	</tr>
 	    <tbody>
 	    	<tr ng-repeat="rsc in resources | orderBy:order | filter:search">
-	    		<td class="center"><button class="btn btn-default">{{rsc.network_address}}</button></td>
+	    		<td class="center"><button ui-sref="dashboard.infoNode({network_address:rsc.network_address})" class="btn btn-default">{{rsc.network_address}}</button></td>
 	    		<td></td><td class="center"><button class="btn btn-default">{{rsc.id}}</button></td>
 				<td></td><td class="center"><button class="btn btn-default">{{rsc.cpu}}</button></td>
 				<td></td><td class="center"><button class="btn btn-default">{{rsc.core}}</button></td>
 				<td></td><td class="center">
 					<button ng-show="rsc.state=='Alive'" class="btn btn-success">Alive</button>
+					<button ng-show="rsc.state=='Absent'" class="btn btn-warning">Absent</button>
 					<button ng-show="rsc.state=='Dead'" class="btn btn-danger">Dead</button>
 				</td>
-				<td></td><td class="center"><button ui-sref="dashboard.infoRSC({core:rsc.id})" class="btn btn-info">Properties</button></td>
+				<td></td><td class="center"><button ui-sref="dashboard.infoRSC({id:rsc.id})" class="btn btn-info">Properties</button></td>
 				<td></td><td ng-show="username=='docker'"><button ui-sref="dashboard.create" class="btn btn-primary" ng-controller="CreateCtrl" ng-click="init(rsc.id)">Send a job</button></td>
-				<td></td><td ng-show="username=='oar'"><button class="btn btn-danger" ng-click="test($index)">Delete this resource</button></td>
+				<td></td><td ng-show="username=='oar'"><button class="btn btn-danger" ng-click="test(rsc.id)">Delete this resource</button></td>
 	    	</tr>
     </table>
 </div>

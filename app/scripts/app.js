@@ -138,7 +138,7 @@ angular
     })
       .state('dashboard.infoRSC',{
        templateUrl:'views/dashboard/detail.html',
-       url:'/resources/detail/id={core}',
+       url:'/resources/detail/{id}',
        controller:'DetailCtrl',
        resolve: {
           loadMyFile:function($ocLazyLoad) {
@@ -151,13 +151,26 @@ angular
    })
       .state('dashboard.infoJob',{
        templateUrl:'views/dashboard/detail.html',
-       url:'/jobs/detail/id={core}',
+       url:'/jobs/detail/{id}',
        controller:'DetailCtrl',
        resolve: {
           loadMyFile:function($ocLazyLoad) {
             $ocLazyLoad.load({
                 name:'sbAdminApp',
                 files:['scripts/controllers/detailCtrl.js']
+            })
+          }
+        }
+   })
+      .state('dashboard.infoNode',{
+       templateUrl:'views/node/node.html',
+       url:'/nodes/detail/{network_address}',
+       controller:'NodeCtrl',
+       resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/node/node.js']
             })
           }
         }

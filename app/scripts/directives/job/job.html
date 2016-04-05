@@ -7,7 +7,7 @@
 	            <div ng-show="username=='docker'">
                     <button ng-show="job.state=='Running'" type="button" class="btn btn-warning btn-circle" ng-click="suspend(job)"><i class="fa fa-pause"></i>
 	               </button>
-                    <button ng-show="job.state=='Pending'" type="button" class="btn btn-success btn-circle" ng-click="restart(job)"><i class="fa fa-play"></i>
+                    <button ng-show="job.state=='Hold'" type="button" class="btn btn-success btn-circle" ng-click="restart(job)"><i class="fa fa-play"></i>
                     </button>
 	               <button ng-hide="job.state=='Finish'" type="button" class="btn btn-danger btn-circle" ng-click="stop(job)"><i class="fa fa-stop"></i>
 	               </button>

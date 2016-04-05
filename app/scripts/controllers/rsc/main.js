@@ -31,14 +31,11 @@ angular.module('sbAdminApp')
     $scope.order = function(elem){
       return elem['network_address'];
     }
-    $scope.test = function(index){
-      rscFact.changeRSCState(index,"Dead");
-    }
-    $scope.deleteRSC = function(index){
+    $scope.deleteRSC = function(id){
       var r = confirm("Are you sure you want to delete this resource?")
       if(r==true){
-        rscFact.deleteRSC(index);
-        JobFact.rscDeleted(rscFact.getRSC(index))
+        rscFact.deleteRSC(id);
+        JobFact.rscDeleted(id);
         alert('This resource have been deleted');
       }
       else {

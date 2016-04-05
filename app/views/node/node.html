@@ -1,0 +1,37 @@
+<div ng-show="loading">Loading ...</div>
+<div ng-hide="loading">
+	<div class="row">
+	    <h1>
+	        Informations about {{network_address}}
+	    </h1>
+	</div>
+	<div ng-hide="error">
+		<table class="table">
+	    		<tr>
+	    			<td></td><td class="center">RSC ID</td>
+		    		<td></td><td class="center">CPU ID</td>
+		    		<td></td><td class="center">CORE ID</td>
+		    		<td></td><td class="center">State</td>
+		    		<td></td><td class="center">Properties</td><td></td><td></td>
+		    	</tr>
+		    <tbody>
+		    	<tr ng-repeat="rsc in details | orderBy:'id'">
+		    		<td></td><td class="center"><button class="btn btn-default">{{rsc.id}}</button></td>
+					<td></td><td class="center"><button class="btn btn-default">{{rsc.cpu}}</button></td>
+					<td></td><td class="center"><button class="btn btn-default">{{rsc.core}}</button></td>
+					<td></td><td class="center">
+						<button ng-show="rsc.state=='Alive'" class="btn btn-success">Alive</button>
+						<button ng-show="rsc.state=='Absent'" class="btn btn-warning">Absent</button>
+						<button ng-show="rsc.state=='Dead'" class="btn btn-danger">Dead</button>
+					</td>
+					<td></td><td class="center"><button ui-sref="dashboard.infoRSC({core:rsc.id})" class="btn btn-info">Properties</button></td>
+					<td></td><td ng-show="username=='docker'"><button ui-sref="dashboard.create" class="btn btn-primary" ng-controller="CreateCtrl" ng-click="init(rsc.id)">Send a job</button></td>
+					<td></td><td ng-show="username=='oar'"><button class="btn btn-danger" ng-click="test(rsc.id)">Delete this resource</button></td>
+		    	</tr>
+	    </table>
+	</div>
+
+	<div ng-show="error">
+		<h2>Error : {{errorText}}</h2>
+	</div>
+</div>

@@ -10,10 +10,9 @@ angular.module('sbAdminApp')
   .controller('DetailCtrl', ['$scope', 'rscFact', 'JobFact', '$location', function($scope, rscFact, JobFact, $location){
     var url = $location.url();
     var params = url.split('/');
-    var paramID = params[params.length-1].split('=');
     $scope.error = false;
     $scope.type = params[params.length-3];    
-    $scope.id = paramID[paramID.length-1];
+    $scope.id = params[params.length-1];
   	if($scope.type=='resources'){
       $scope.objet = rscFact.getRSC($scope.id);
       $scope.type = 'resource';

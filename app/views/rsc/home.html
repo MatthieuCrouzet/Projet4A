@@ -23,8 +23,9 @@
 				<ng-search name="ID :" model="search.id"></ng-search>
 				<label>State :</label>
 				<span><input type="radio" name="options" id="option1" ng-model="search.state" value="Alive">Alive
-		    	<input type="radio" name="options" id="option2" ng-model="search.state" value="Dead">Dead
-		    	<input type="radio" name="options" id="option3" ng-model="search.state" value="">All
+				<input type="radio" name="options" id="option2" ng-model="search.state" value="Busy">Busy
+		    	<input type="radio" name="options" id="option3" ng-model="search.state" value="Dead">Dead
+		    	<input type="radio" name="options" id="option4" ng-model="search.state" value="">All
 	    		</span></span>
     <table class="table">
     		<tr>
@@ -47,7 +48,7 @@
 				</td>
 				<td></td><td class="center"><button ui-sref="dashboard.infoRSC({core:rsc.id})" class="btn btn-info">Properties</button></td>
 				<td></td><td ng-show="username=='docker'"><button ui-sref="dashboard.create" class="btn btn-primary" ng-controller="CreateCtrl" ng-click="init(rsc.id)">Send a job</button></td>
-				<td></td><td ng-show="username=='oar'"><button class="btn btn-danger" ng-click="deleteRSC($index)">Delete this resource</button></td>
+				<td></td><td ng-show="username=='oar'"><button class="btn btn-danger" ng-click="test($index)">Delete this resource</button></td>
 	    	</tr>
     </table>
 </div>

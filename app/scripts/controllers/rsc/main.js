@@ -31,6 +31,9 @@ angular.module('sbAdminApp')
     $scope.order = function(elem){
       return elem['network_address'];
     }
+    $scope.test = function(index){
+      rscFact.changeRSCState(index,"Dead");
+    }
     $scope.deleteRSC = function(index){
       var r = confirm("Are you sure you want to delete this resource?")
       if(r==true){

@@ -9,191 +9,188 @@
 angular.module('sbAdminApp')
     .factory('JobFact', [ 'rscFact', '$rootScope', '$http', function (rscFact, $rootScope, $http) {
       var factory = {
-      jobs :[
-        {
-          "api_timestamp": 1352707511,
-          "array_id": 5540,
-          "array_index": null,
-          "command": "sleep 300",
-          "cpuset_name": "kameleon_5540",
-          "dependencies": [],
-          "events": [],
-          "exit_code": null,
-          "id": 5540,
-          "initial_request": "oarsub sleep 300",
-          "launching_directory": "/home/kameleon",
-          "links": [
-            {
-              "href": "/oarapi/jobs/5540",
-              "rel": "self"
-            },
-            {
-              "href": "/oarapi/jobs/5540/resources",
-              "rel": "collection",
-              "title": "resources"
-            },
-            {
-              "href": "/oarapi/jobs/5540/nodes",
-              "rel": "collection",
-              "title": "nodes"
-            }
-          ],
-          "message": "Karma = 0.000",
-          "name": null,
-          "nodes": [
-            {
-              "api_timestamp": 1352707511,
-              "links": [
-                {
-                  "href": "/oarapi/resources/nodes/node1",
-                  "rel": "self"
-                }
-              ],
-              "network_address": "node1",
-              "status": "assigned"
-            }
-          ],
-          "owner": "kameleon",
-          "project": "default",
-          "properties": "desktop_computing = 'NO'",
-          "queue": "default",
-          "reservation": "None",
-          "resources": [
-            {
-              "api_timestamp": 1352707511,
-              "id": 1,
-              "links": [
-                {
-                  "href": "/oarapi/resources/1",
-                  "rel": "self"
-                },
-                {
-                  "href": "/oarapi/resources/1/jobs",
-                  "rel": "collection",
-                  "title": "jobs"
-                }
-              ],
-              "status": "assigned"
-            }
-          ],
-          "resubmit_job_id": null,
-          "scheduled_start": 1352707488,
-          "start_time": 1352707488,
-          "state": "Running",
-          "stderr_file": "OAR.5540.stdout",
-          "stdout_file": "OAR.5540.stderr",
-          "stop_time": 0,
-          "submission_time": 1352707487,
-          "type": "PASSIVE",
-          "types": [],
-          "walltime": 7200,
-          "wanted_resources": "-l \"{type = 'default'}/resource_id=1,walltime=2:0:0\" "
-        },
-        {
-          "api_timestamp": 1352707511,
-          "array_id": 5542,
-          "array_index": null,
-          "command": "sleep 300",
-          "cpuset_name": "kameleon_5542",
-          "dependencies": [],
-          "events": [],
-          "exit_code": null,
-          "id": 5542,
-          "initial_request": "oarsub -l /core=2 sleep 300",
-          "launching_directory": "/home/kameleon",
-          "links": [
-            {
-              "href": "/oarapi/jobs/5542",
-              "rel": "self"
-            },
-            {
-              "href": "/oarapi/jobs/5542/resources",
-              "rel": "collection",
-              "title": "resources"
-            },
-            {
-              "href": "/oarapi/jobs/5542/nodes",
-              "rel": "collection",
-              "title": "nodes"
-            }
-          ],
-          "message": "Karma = 0.000",
-          "name": null,
-          "nodes": [
-            {
-              "api_timestamp": 1352707511,
-              "links": [
-                {
-                  "href": "/oarapi/resources/nodes/node1",
-                  "rel": "self"
-                }
-              ],
-              "network_address": "node1",
-              "status": "assigned"
-            }
-          ],
-          "owner": "kameleon",
-          "project": "default",
-          "properties": "desktop_computing = 'NO'",
-          "queue": "default",
-          "reservation": "None",
-          "resources": [
-            {
-              "api_timestamp": 1352707511,
-              "id": 3,
-              "links": [
-                {
-                  "href": "/oarapi/resources/3",
-                  "rel": "self"
-                },
-                {
-                  "href": "/oarapi/resources/3/jobs",
-                  "rel": "collection",
-                  "title": "jobs"
-                }
-              ],
-              "status": "assigned"
-            },
-            {
-              "api_timestamp": 1352707511,
-              "id": 4,
-              "links": [
-                {
-                  "href": "/oarapi/resources/4",
-                  "rel": "self"
-                },
-                {
-                  "href": "/oarapi/resources/4/jobs",
-                  "rel": "collection",
-                  "title": "jobs"
-                }
-              ],
-              "status": "assigned"
-            }
-          ],
-          "resubmit_job_id": null,
-          "scheduled_start": 1352707510,
-          "start_time": 1352707510,
-          "state": "Running",
-          "stderr_file": "OAR.5542.stdout",
-          "stdout_file": "OAR.5542.stderr",
-          "stop_time": 0,
-          "submission_time": 1352707509,
-          "type": "PASSIVE",
-          "types": [],
-          "walltime": 7200,
-          "wanted_resources": "-l \"{type = 'default'}/core=2,walltime=2:0:0\" "
-        }
-      ],
+       jobs :[
+      //   {
+      //     "api_timestamp": 1352707511,
+      //     "array_id": 5540,
+      //     "array_index": null,
+      //     "command": "sleep 300",
+      //     "cpuset_name": "kameleon_5540",
+      //     "dependencies": [],
+      //     "events": [],
+      //     "exit_code": null,
+      //     "id": 5540,
+      //     "initial_request": "oarsub sleep 300",
+      //     "launching_directory": "/home/kameleon",
+      //     "links": [
+      //       {
+      //         "href": "/oarapi/jobs/5540",
+      //         "rel": "self"
+      //       },
+      //       {
+      //         "href": "/oarapi/jobs/5540/resources",
+      //         "rel": "collection",
+      //         "title": "resources"
+      //       },
+      //       {
+      //         "href": "/oarapi/jobs/5540/nodes",
+      //         "rel": "collection",
+      //         "title": "nodes"
+      //       }
+      //     ],
+      //     "message": "Karma = 0.000",
+      //     "name": null,
+      //     "nodes": [
+      //       {
+      //         "api_timestamp": 1352707511,
+      //         "links": [
+      //           {
+      //             "href": "/oarapi/resources/nodes/node1",
+      //             "rel": "self"
+      //           }
+      //         ],
+      //         "network_address": "node1",
+      //         "status": "assigned"
+      //       }
+      //     ],
+      //     "owner": "kameleon",
+      //     "project": "default",
+      //     "properties": "desktop_computing = 'NO'",
+      //     "queue": "default",
+      //     "reservation": "None",
+      //     "resources": [
+      //       {
+      //         "api_timestamp": 1352707511,
+      //         "id": 1,
+      //         "links": [
+      //           {
+      //             "href": "/oarapi/resources/1",
+      //             "rel": "self"
+      //           },
+      //           {
+      //             "href": "/oarapi/resources/1/jobs",
+      //             "rel": "collection",
+      //             "title": "jobs"
+      //           }
+      //         ],
+      //         "status": "assigned"
+      //       }
+      //     ],
+      //     "resubmit_job_id": null,
+      //     "scheduled_start": 1352707488,
+      //     "start_time": 1352707488,
+      //     "state": "Running",
+      //     "stderr_file": "OAR.5540.stdout",
+      //     "stdout_file": "OAR.5540.stderr",
+      //     "stop_time": 0,
+      //     "submission_time": 1352707487,
+      //     "type": "PASSIVE",
+      //     "types": [],
+      //     "walltime": 7200,
+      //     "wanted_resources": "-l \"{type = 'default'}/resource_id=1,walltime=2:0:0\" "
+      //   },
+      //   {
+      //     "api_timestamp": 1352707511,
+      //     "array_id": 5542,
+      //     "array_index": null,
+      //     "command": "sleep 300",
+      //     "cpuset_name": "kameleon_5542",
+      //     "dependencies": [],
+      //     "events": [],
+      //     "exit_code": null,
+      //     "id": 5542,
+      //     "initial_request": "oarsub -l /core=2 sleep 300",
+      //     "launching_directory": "/home/kameleon",
+      //     "links": [
+      //       {
+      //         "href": "/oarapi/jobs/5542",
+      //         "rel": "self"
+      //       },
+      //       {
+      //         "href": "/oarapi/jobs/5542/resources",
+      //         "rel": "collection",
+      //         "title": "resources"
+      //       },
+      //       {
+      //         "href": "/oarapi/jobs/5542/nodes",
+      //         "rel": "collection",
+      //         "title": "nodes"
+      //       }
+      //     ],
+      //     "message": "Karma = 0.000",
+      //     "name": null,
+      //     "nodes": [
+      //       {
+      //         "api_timestamp": 1352707511,
+      //         "links": [
+      //           {
+      //             "href": "/oarapi/resources/nodes/node1",
+      //             "rel": "self"
+      //           }
+      //         ],
+      //         "network_address": "node1",
+      //         "status": "assigned"
+      //       }
+      //     ],
+      //     "owner": "kameleon",
+      //     "project": "default",
+      //     "properties": "desktop_computing = 'NO'",
+      //     "queue": "default",
+      //     "reservation": "None",
+      //     "resources": [
+      //       {
+      //         "api_timestamp": 1352707511,
+      //         "id": 3,
+      //         "links": [
+      //           {
+      //             "href": "/oarapi/resources/3",
+      //             "rel": "self"
+      //           },
+      //           {
+      //             "href": "/oarapi/resources/3/jobs",
+      //             "rel": "collection",
+      //             "title": "jobs"
+      //           }
+      //         ],
+      //         "status": "assigned"
+      //       },
+      //       {
+      //         "api_timestamp": 1352707511,
+      //         "id": 4,
+      //         "links": [
+      //           {
+      //             "href": "/oarapi/resources/4",
+      //             "rel": "self"
+      //           },
+      //           {
+      //             "href": "/oarapi/resources/4/jobs",
+      //             "rel": "collection",
+      //             "title": "jobs"
+      //           }
+      //         ],
+      //         "status": "assigned"
+      //       }
+      //     ],
+      //     "resubmit_job_id": null,
+      //     "scheduled_start": 1352707510,
+      //     "start_time": 1352707510,
+      //     "state": "Running",
+      //     "stderr_file": "OAR.5542.stdout",
+      //     "stdout_file": "OAR.5542.stderr",
+      //     "stop_time": 0,
+      //     "submission_time": 1352707509,
+      //     "type": "PASSIVE",
+      //     "types": [],
+      //     "walltime": 7200,
+      //     "wanted_resources": "-l \"{type = 'default'}/core=2,walltime=2:0:0\" "
+      //   }
+       ],
       getJobs : function() {
-        // $.ajax({
-        //     type: "GET",
-        //     url: "http://localhost:48080/oarapi/resources.json",
-        //     dataType: "jsonp",
-        //     success: function (xml) {
-        //         factory.resources = xml.items;
-        //     },
-        // })
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET','http://localhost:48080/oarapi/jobs/details', false);
+        xhr.send();
+        if(xhr.status == 200) factory.jobs = JSON.parse(xhr.responseText).items;
+        else alert('It failed !');
         return factory.jobs;
       },
       getJob : function(id) {
@@ -220,11 +217,20 @@ angular.module('sbAdminApp')
         factory.jobs.push(newJob);
       },
       stopJob : function(job) {
-        angular.forEach(factory.jobs, function(value, key){
-          if(value['id'] == job['id']){
-              value['state'] = "Finish";   
-          }
-        })     
+        // var xhr = new XMLHttpRequest();
+        // var url = 'http://'+$rootScope.username+':'+$rootScope.password+'@localhost:48080/';
+        // var params = {'id': job.id};
+        // xhr.open("POST", url, true);
+
+        // //Send the proper header information along with the request
+        // xhr.setRequestHeader("Content-type", "application/json");
+
+        // xhr.onreadystatechange = function() {//Call a function when the state changes.
+        //     if(xhr.readyState == 4 && http.status == 200) {
+        //         alert(xhr.responseText);
+        //     }
+        // }
+        // xhr.send(params);    
         angular.forEach(job.resources, function(value, key){
           rscFact.changeRSCState(value.id,"Free");
         })

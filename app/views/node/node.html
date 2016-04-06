@@ -24,9 +24,9 @@
 						<button ng-show="rsc.state=='Absent'" class="btn btn-warning">Absent</button>
 						<button ng-show="rsc.state=='Dead'" class="btn btn-danger">Dead</button>
 					</td>
-					<td></td><td class="center"><button ui-sref="dashboard.infoRSC({core:rsc.id})" class="btn btn-info">Properties</button></td>
+					<td></td><td class="center"><button ui-sref="dashboard.infoRSC({id:rsc.id})" class="btn btn-info">Properties</button></td>
 					<td></td><td ng-show="username=='docker'"><button ui-sref="dashboard.create" class="btn btn-primary" ng-controller="CreateCtrl" ng-click="init(rsc.id)">Send a job</button></td>
-					<td></td><td ng-show="username=='oar'"><button class="btn btn-danger" ng-click="test(rsc.id)">Delete this resource</button></td>
+					<td></td><td ng-show="username=='oar'"><button class="btn btn-danger" ng-click="deleteRSC(rsc.id)">Delete this resource</button></td>
 		    	</tr>
 	    </table>
 	</div>

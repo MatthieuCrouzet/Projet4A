@@ -13,15 +13,16 @@ angular.module('sbAdminApp')
 				job : '=',
 				suspend : '&',
 				restart : '&',
-				stop : '&'
+				stop : '&',
+				username : '='
 			},
 			restrict : 'E',
 			templateUrl : 'scripts/directives/job/job.html',
-			controller: function($scope){
+			controller: function($scope, $rootScope){
 				$scope.color = function(state){
 					if(state=='Running'){
 						return 'green';
-					}else if(state=='Pending'){
+					}else if(state=='Hold'){
 						return 'yellow';
 					}else{ 
 						return 'red';

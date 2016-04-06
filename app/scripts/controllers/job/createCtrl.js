@@ -10,6 +10,7 @@ angular.module('sbAdminApp')
   .controller('CreateCtrl', ['$scope', 'rscFact', 'TimeFact', 'JobFact', function ($scope, rscFact, TimeFact, JobFact, $root) {
   	$scope.newJob = {};
     $scope.tabn2 = [1];
+    $scope.RSC = {};
     $scope.init = function(id){
       $scope.RSC = rscFact.getRSC(id);
       $scope.newJob['reservation']=TimeFact.getDateTenMinutesLater();
@@ -21,6 +22,15 @@ angular.module('sbAdminApp')
   	$scope.createJob = function(newJob){
       var timeOut = false;
       if('command' in newJob && 'resource' in newJob){
+        if(!('network_address' in $scope.RSC)){
+          angular.forEach(rscFact.getResources(), function(value, key){
+            if(value.state=='Alive'){
+              $scope.RSC.network_address = value.network_address;
+              $scope.RSC.id = value.id;
+            }
+          })
+          
+        }
         var reservation = newJob.reservation;
         if(newJob.reservation == ""){ 
           reservation = "None";

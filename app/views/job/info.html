@@ -30,6 +30,6 @@
 <div class="row">
     <h2>Results</h2>
     <div ng-repeat="job in jobs | orderBy:order | filter:search">
-        <ng-job job="job" suspend="suspendJob(job)" stop="stopJob(job)" restart="restartJob(job)"></ng-job>
+        <ng-job job="job" suspend="suspendJob(job)" stop="stopJob(job)" restart="restartJob(job)" username="username"></ng-job>
     </div>
 </div>

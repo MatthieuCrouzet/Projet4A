@@ -9,8 +9,9 @@
 angular.module('sbAdminApp')
     .factory('rscFact', ['$http', 'TimeFact', '$rootScope',function ($http, TimeFact, $rootScope) {
     var factory = {
+      first_time : true,
       resources : [],
-      getResources : function() {
+      getRSCS : function(){
          var xhr = new XMLHttpRequest();
          xhr.open('GET','http://localhost:48080/oarapi/resources/full.json', false);
          xhr.send();
@@ -18,6 +19,13 @@ angular.module('sbAdminApp')
             factory.resources = JSON.parse(xhr.responseText).items;
          else alert('It failed !');
         return factory.resources;
+      },
+      getResources : function() {
+        if(factory.first_time){
+          factory.first_time = false; 
+          return factory.getRSCS();
+        }
+        else return factory.resources;
       },
       nextID : function(){
          var id = 0;

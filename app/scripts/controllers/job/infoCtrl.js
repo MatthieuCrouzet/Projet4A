@@ -7,20 +7,19 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
- .controller('InfoCtrl', ['$scope', 'JobFact', function ($scope, JobFact) {
-  	$scope.user = "docker";
+ .controller('InfoCtrl', ['$scope', 'JobFact', function ($scope, JobFact, $rootScope) {
     $scope.jobs = JobFact.getJobs();
-    $scope.pie = {
-      'data' : [],
-      'labels' : ['Running', 'Pending', 'Finish' ],
-      'color' : ['green', 'yellow', 'red']
-    };
-    $scope.getStates = function(){
-      return JobFact.getStates();
-    }
-    $scope.$watchCollection('getStates',function(){
-      $scope.pie['data'] = $scope.getStates();
-    });
+    // $scope.pie = {
+    //   'data' : [],
+    //   'labels' : ['Running', 'Pending', 'Finish' ],
+    //   'color' : ['green', 'yellow', 'red']
+    // };
+    // $scope.getStates = function(){
+    //   return JobFact.getStates();
+    // }
+    // $scope.$watchCollection('getStates',function(){
+    //   $scope.pie['data'] = $scope.getStates();
+    // });
     $scope.stopJob = function(job){
       var r = confirm("Are you sure you want to stop this job?");
       JobFact.stopJob(job);

@@ -21,7 +21,7 @@ angular
       events:true,
     });
 
-    $urlRouterProvider.otherwise('/dashboard/home');
+    $urlRouterProvider.otherwise('/dashboard/resources');
 
     $stateProvider
       .state('dashboard', {
@@ -79,7 +79,7 @@ angular
         }
     })
       .state('dashboard.home',{
-        url:'/home',
+        url:'/resources',
         controller: 'MainCtrl',
         templateUrl:'views/rsc/home.html',
         resolve: {
@@ -109,7 +109,7 @@ angular
     })
       .state('dashboard.info',{
         templateUrl:'views/job/info.html',
-        url:'/resources',
+        url:'/jobs',
         controller:'InfoCtrl',
         resolve: {
           loadMyFile:function($ocLazyLoad) {
